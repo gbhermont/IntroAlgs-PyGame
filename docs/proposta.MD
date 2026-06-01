@@ -7,14 +7,6 @@ Match Up
 
 ## 2. Integrantes do grupo
 
-Liste os integrantes do grupo.
-
-<<<<<<< HEAD
-- Nome 1: 
-- Nome 2:
-- Nome 3: 
-- Nome 4: 
-=======
 - Nome 1:Gabriel de Souza Junqueira Hermont
 - Nome 2:Kemily Eduardo da Luz
 - Nome 3:Maria Clara Soalheiro Bessa
