@@ -1,8 +1,5 @@
 # Proposta Inicial do Jogo
 
-Este documento deve ser preenchido pelo grupo na Semana 1 do projeto.
-
-A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolvida com Python e Pygame dentro do prazo disponível.
 
 ## 1. Nome provisório do jogo
 
@@ -10,8 +7,11 @@ Match Up
 
 ## 2. Integrantes do grupo
 
+<<<<<<< HEAD
 Liste os integrantes do grupo.
 
+=======
+>>>>>>> 6eb75d60caeba356c471f5e8f91cbe24b023ba5a
 - Nome 1:Gabriel de Souza Junqueira Hermont
 - Nome 2:Kemily Eduardo da Luz
 - Nome 3:Maria Clara Soalheiro Bessa
@@ -19,55 +19,17 @@ Liste os integrantes do grupo.
 
 ## 3. Tipo de jogo
 
-Indique o tipo de jogo que será desenvolvido.
-
-Exemplos:
-
-- jogo de desviar de obstáculos;
-- jogo de coleta de itens;
-- labirinto simples;
-- jogo de perguntas e respostas;
-- jogo de memória;
-- Pong;
-- Snake;
-- Breakout;
-- nave desviando de meteoros;
-- corrida simples com obstáculos;
-- jogo de clique rápido;
-- jogo de sobrevivência simples.
-
 Tipo escolhido pelo grupo:
 
-> Jogo de Memória
+- Jogo de Memória
 
 ## 4. Descrição geral do jogo
 
-Explique, em poucas linhas, como o jogo funcionará.
+Descrição:  
 
-Procure responder:
-
-- O que aparece na tela?
-- O que o jogador controla?
-- O que o jogador precisa fazer?
-- Quais desafios aparecem durante a partida?
-
-Descrição:
-
-> No jogo Match Up, os jogadores são apresentados a um tabuleiro com diversas cartas viradas para baixo. A interface do jogo também exibe informações relevantes, como o número de tentativas realizadas e a opção de reiniciar a partida. O jogador interage com o jogo utilizando o mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares de cartas idênticas, exigindo que o jogador memorize a posição de cada imagem. O desafio reside em recordar a localização das imagens para formar as combinações corretas. A partida é concluída quando todos os pares são descobertos. Um exemplo clássico desse tipo de jogo é o "Jogo do Mico".
+- No jogo Match Up, os jogadores são apresentados a um tabuleiro com diversas cartas viradas para baixo. A interface do jogo também exibe informações relevantes, como o número de tentativas realizadas e a opção de reiniciar a partida. O jogador interage com o jogo utilizando o mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares de cartas idênticas, exigindo que o jogador memorize a posição de cada imagem. O desafio reside em recordar a localização das imagens para formar as combinações corretas. A partida é concluída quando todos os pares são descobertos. Um exemplo clássico desse tipo de jogo é o "Jogo do Mico".
 
 ## 5. Objetivo do jogador
-
-Explique qual é o objetivo principal do jogador.
-
-Exemplos:
-
-- coletar o maior número possível de itens;
-- sobreviver pelo maior tempo possível;
-- chegar até o final do labirinto;
-- acertar alvos;
-- responder perguntas corretamente;
-- evitar obstáculos;
-- quebrar todos os blocos.
 
 Objetivo:
 
@@ -75,17 +37,8 @@ Encontrar todos os pares de cartas no menor número de tentativas possível.
 
 ## 6. Regras principais
 
-Liste as principais regras do jogo.
 
-Exemplo:
-
-- O jogador começa com 3 vidas.
-- Cada moeda coletada vale 10 pontos.
-- Cada colisão com obstáculo remove 1 vida.
-- A partida termina quando as vidas chegam a zero.
-- O jogador vence se alcançar 100 pontos.
-
-Regras do grupo:
+Regras do jogo:
 
 Regra 1: O jogador pode virar apenas duas cartas por vez.
 Regra 2: Se as duas cartas selecionadas forem idênticas, elas permanecem visíveis e são contabilizadas como um par encontrado.
@@ -95,35 +48,15 @@ Regra 5: O número total de tentativas será registrado e exibido ao longo de to
 
 ## 7. Condição de vitória
 
-Explique como o jogador vence ou conclui o jogo.
-
-Exemplos:
-
-- atingir determinada pontuação;
-- chegar ao final da fase;
-- sobreviver até o tempo acabar;
-- responder uma quantidade mínima de perguntas;
-- quebrar todos os blocos.
-
 Condição de vitória:
 
-> O jogador vence a partida quando consegue encontrar e combinar todos os pares de cartas presentes no tabuleiro.
+- O jogador vence a partida quando consegue encontrar e combinar todos os pares de cartas presentes no tabuleiro.
 
 ## 8. Condição de derrota ou encerramento
 
-Explique como o jogador perde ou quando a partida termina.
-
-Exemplos:
-
-- perder todas as vidas;
-- acabar o tempo;
-- colidir com determinado obstáculo;
-- errar muitas perguntas;
-- deixar a bola cair, no caso de Breakout ou Pong.
-
 Condição de derrota ou encerramento:
 
-A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo.
+- A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo.
 
 ## 9. Elementos previstos no jogo
 
