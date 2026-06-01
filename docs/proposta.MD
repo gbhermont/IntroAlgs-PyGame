@@ -6,7 +6,7 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 ## 1. Nome provisório do jogo
 
-Escreva aqui o nome provisório do jogo.
+Match Up
 
 Exemplo:
 
@@ -16,10 +16,10 @@ Exemplo:
 
 Liste os integrantes do grupo.
 
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+- Nome 1:Gabriel de Souza Junqueira Hermont
+- Nome 2:Kemily Eduardo da Luz
+- Nome 3:Maria Clara Soalheiro Bessa
+- Nome 4:Armando Schoenstatt Rodrigues e Moreira
 
 ## 3. Tipo de jogo
 
@@ -42,7 +42,7 @@ Exemplos:
 
 Tipo escolhido pelo grupo:
 
-> Escreva aqui.
+> Jogo de Memória
 
 ## 4. Descrição geral do jogo
 
@@ -57,7 +57,7 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+> No jogo Match Up, os jogadores são apresentados a um tabuleiro com diversas cartas viradas para baixo. A interface do jogo também exibe informações relevantes, como o número de tentativas realizadas e a opção de reiniciar a partida. O jogador interage com o jogo utilizando o mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares de cartas idênticas, exigindo que o jogador memorize a posição de cada imagem. O desafio reside em recordar a localização das imagens para formar as combinações corretas. A partida é concluída quando todos os pares são descobertos. Um exemplo clássico desse tipo de jogo é o "Jogo do Mico".
 
 ## 5. Objetivo do jogador
 
@@ -75,7 +75,7 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+Encontrar todos os pares de cartas no menor número de tentativas possível.
 
 ## 6. Regras principais
 
@@ -91,11 +91,11 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+Regra 1: O jogador pode virar apenas duas cartas por vez.
+Regra 2: Se as duas cartas selecionadas forem idênticas, elas permanecem visíveis e são contabilizadas como um par encontrado.
+Regra 3: Caso as cartas escolhidas sejam diferentes, elas serão exibidas por um breve período e, em seguida, voltarão a ficar viradas para baixo.
+Regra 4: O jogo prossegue até que todos os pares no tabuleiro sejam encontrados.
+Regra 5: O número total de tentativas será registrado e exibido ao longo de toda a partida.
 
 ## 7. Condição de vitória
 
@@ -111,7 +111,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+> O jogador vence a partida quando consegue encontrar e combinar todos os pares de cartas presentes no tabuleiro.
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +127,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo.
 
 ## 9. Elementos previstos no jogo
 
@@ -188,9 +188,10 @@ Exemplo:
 
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+- Clique do mouse: Utilizado para selecionar e virar as cartas no tabuleiro.
+- ESC: Tecla para sair do jogo.
+- Botão fechar janela (X): Encerra o jogo.
+
 
 ## 11. Organização inicial do código
 
@@ -198,11 +199,18 @@ Explique como o grupo pretende organizar o código.
 
 Exemplo:
 
-- `main.py`: inicia o jogo;
-- `src/jogo.py`: contém o loop principal;
-- `src/config.py`: guarda configurações como tamanho da tela e cores;
-- `src/funcoes.py`: contém funções auxiliares;
-- `src/dados.py`: contém funções de leitura e escrita de arquivos.
+main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo.
+config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e outras constantes.
+jogo.py: Contém o loop principal do jogo e gerencia a transição e o estado das diferentes telas (ex: menu, jogo, fim de jogo).
+cartas.py: Módulo responsável pela lógica das cartas, incluindo sua criação, embaralhamento, virar/desvirar e verificação de pares.
+funcoes.py: Módulo para funções auxiliares e utilitárias, como renderização de textos, criação de botões e outros elementos gráficos comuns.
+src/: Diretório que abrigará o código-fonte principal do jogo, incluindo a lógica do loop, regras, sprites e dados específicos.
+assets/: Diretório para armazenar todos os recursos visuais e sonoros do jogo, como imagens das cartas, fontes e efeitos sonoros.
+data/: Diretório para arquivos persistentes, como o registro de recordes ou rankings de jogadores.
+tests/: Diretório para os testes unitários do projeto, utilizando a ferramenta pytest.
+docs/: Diretório para a documentação do projeto, incluindo esta proposta inicial e outros documentos relevantes.
+
+
 
 Organização planejada:
 
