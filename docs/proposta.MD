@@ -268,18 +268,23 @@ Liste funcionalidades extras que o grupo poderá implementar se conseguir conclu
 
 Exemplos:
 
-- tela inicial;
 - sons;
 - fases;
+- tela inicial;
 - aumento de dificuldade;
 - ranking;
 - animações;
 - novos tipos de obstáculos;
 - diferentes personagens;
-- menu de pausa.
+- menu de pausa,
+- jogo contra a máquina, outra pessoa ou sozinho
 
 Melhorias possíveis:
 
-- Melhoria 1:
-- Melhoria 2:
-- Melhoria 3:
+- Melhoria 1: adicionar sons e efeitos visuais ao virar as cartas e ao concluir a
+partida.
+- Melhoria 2:  criar níveis de dificuldade diferentes, aumentando a quantidade de
+cartas no tabuleiro.
+- Melhoria 3: implementar uma tela inicial e um ranking com os melhores resultados,
+baseado no menor número de tentativas ou no menor tempo.
+- Melhoria 4: Permitir que tenha 2 jogadores
