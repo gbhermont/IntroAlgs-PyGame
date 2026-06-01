@@ -7,15 +7,12 @@ Match Up
 
 ## 2. Integrantes do grupo
 
-<<<<<<< HEAD
 Liste os integrantes do grupo.
 
-=======
->>>>>>> 6eb75d60caeba356c471f5e8f91cbe24b023ba5a
-- Nome 1:Gabriel de Souza Junqueira Hermont
-- Nome 2:Kemily Eduardo da Luz
-- Nome 3:Maria Clara Soalheiro Bessa
-- Nome 4:Armando Schoenstatt Rodrigues e Moreira
+- Nome 1: Gabriel de Souza Junqueira Hermont
+- Nome 2: Kemily Eduardo da Luz
+- Nome 3: Maria Clara Soalheiro Bessa
+- Nome 4: Armando Schoenstatt Rodrigues e Moreira
 
 ## 3. Tipo de jogo
 
@@ -158,18 +155,6 @@ Escopo mínimo:
 
 Liste funcionalidades extras que o grupo poderá implementar se conseguir concluir o escopo mínimo.
 
-Exemplos:
-
-- sons;
-- fases;
-- tela inicial;
-- aumento de dificuldade;
-- ranking;
-- animações;
-- novos tipos de obstáculos;
-- diferentes personagens;
-- menu de pausa,
-- jogo contra a máquina, outra pessoa ou sozinho
 
 Melhorias possíveis:
 
