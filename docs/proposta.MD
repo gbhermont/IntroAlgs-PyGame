@@ -16,10 +16,10 @@ Exemplo:
 
 Liste os integrantes do grupo.
 
-- Nome 1:
+- Nome 1: 
 - Nome 2:
-- Nome 3:
-- Nome 4:
+- Nome 3: 
+- Nome 4: 
 
 ## 3. Tipo de jogo
 
@@ -141,7 +141,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O jogador irá interagir com o jogo por meio do mouse, clicando nas cartas do tabuleiro para revelá-las e tentar encontrar os pares corretos. Sua principal função será memorizar as posições das cartas e realizar as combinações certas até completar o jogo.
 
 ## Obstáculos, inimigos ou desafios
 
@@ -151,7 +151,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O principal desafio será lembrar a posição das cartas já reveladas e evitar erros nas combinações. Quando duas cartas diferentes forem escolhidas, elas voltarão a ficar escondidas.
 
 ## Itens, alvos ou objetos de interação
 
@@ -161,7 +161,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória e elementos visuais de fundo e interface.
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -171,7 +171,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O jogo acompanhará o progresso por meio do contador de tentativas e da quantidade de pares encontrados. À medida que os pares forem completados, o jogador avançará até encontrar todas as combinações e finalizar a partida com a mensagem de vitória.
 
 ## 10. Controles previstos
 
