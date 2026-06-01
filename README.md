@@ -1,4 +1,4 @@
-# Nome do Jogo
+#Match Up 
 
 Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
 
@@ -6,10 +6,11 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+Nome 1: Gabriel de Souza Junqueira Hermont -
+Nome 2: Kemily Eduardo da Luz - 
+Nome 3: Maria Clara Soalheiro Bessa - 
+Nome 4: Armando Schoenstatt Rodrigues e Moreira 
+Tipo de jogo: Jogo de Memória 
 
 ## Estrutura do projeto
 
@@ -22,42 +23,45 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
+No jogo de memória, aparece na tela um tabuleiro com cartas viradas para baixo, além de informações como número de tentativas gastas e opção de reiniciar. O jogador controla o mouse e escolhe as cartas clicando nelas para revelá-las. O objetivo é encontrar todos os pares iguais, memorizando a posição de cada carta. Durante a partida, o desafio é lembrar onde cada imagem está e fazer as combinações corretas. O jogo termina quando todos os pares forem encontrados. 
 
 Exemplo:
 
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
-
+> Exemplo: O jogo do Mico, onde você deve achar o par de cada animal correspondente.
+> 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
+Objetivo do jogador: Encontrar todos os pares de cartas no menor número de tentativas possível. 
 
 Exemplo:
 
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
+>Encontrar todos os pares de cartas no menor número de tentativas possível.
+
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
+Regra 1: O jogador pode virar apenas duas cartas por vez. 
+Regra 2: Se as duas cartas escolhidas forem iguais, elas permanecem viradas e contam como um par encontrado.
+Regra 3: Se as cartas forem diferentes, elas ficam visíveis por alguns segundos e depois voltam a ficar viradas para baixo. 
+Regra 4: O jogador deve continuar jogando até encontrar todos os pares do tabuleiro.
+Regra 5: O número de tentativas será contado durante toda a partida 
+Condição de vitória: O jogador vence quando consegue encontrar todos os pares de cartas do tabuleiro. 
+Condição de derrota ou encerramento: A partida termina quando o jogador encontra todos os pares de cartas ou fecha a janela do jogo. 
 
 Exemplo:
 
-- O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- O jogador usa o click do mouse para virar as cartas.
+- Ter 2 cartas iguais mostra que ele acertou o par
+- Caso o contrário ele tem que tentar readivinhar o par de novo
+
 
 ## Controles
 
-Informe as teclas ou comandos utilizados no jogo.
+O jogador escolherá as cartas com o click do seu mouse
 
 Exemplo:
 
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
+- Click do mouse
 - ESC: sair do jogo
 
 ## Como executar o projeto
