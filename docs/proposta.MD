@@ -226,22 +226,14 @@ Organização planejada:
 
 ## 12. Recursos externos previstos
 
-Informe se o grupo pretende utilizar imagens, sons, fontes, tutoriais ou códigos externos.
-
-Exemplo:
-
-- imagens obtidas de banco gratuito;
-- sons gratuitos;
-- tutorial usado apenas como referência;
-- fonte personalizada.
 
 Recursos previstos:
 
-> Escreva aqui.
+- Imagens para o jogo da memória irão ser usadas seguindo um tema específico em um banco gratuito disponível na internet.
+- Sons gratuitos serão usados para enfeitar o projeto ao clique nos menus, no acerto/erro de um par de imagens durante o jogo e ao finalizar uma partida.
+- Tutoriais gratuitos disponíveis na internet sobre funções e capacidades da biblioteca PyGame.
+- Uma fonte personalizada será usada para deixar nosso jogo mais condizente com o tema.
 
-Caso não pretenda utilizar recursos externos, escreva:
-
-> Não pretendemos utilizar recursos externos.
 
 ## 13. Principais dificuldades esperadas
 
