@@ -8,25 +8,14 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 Match Up
 
-Exemplo:
-
-> Corrida dos Obstáculos
-
 ## 2. Integrantes do grupo
 
 Liste os integrantes do grupo.
 
-<<<<<<< HEAD
-- Nome 1: 
-- Nome 2:
-- Nome 3: 
-- Nome 4: 
-=======
 - Nome 1:Gabriel de Souza Junqueira Hermont
 - Nome 2:Kemily Eduardo da Luz
 - Nome 3:Maria Clara Soalheiro Bessa
 - Nome 4:Armando Schoenstatt Rodrigues e Moreira
->>>>>>> c4918354f5ac20851a19df3e18cc0232605adc45
 
 ## 3. Tipo de jogo
 
@@ -142,9 +131,6 @@ Descreva os principais elementos que farão parte do jogo.
 
 ## Jogador ou elemento principal
 
-Exemplo:
-
-> Um personagem controlado pelas setas do teclado.
 
 Descrição:
 
@@ -152,9 +138,6 @@ Descrição:
 
 ## Obstáculos, inimigos ou desafios
 
-Exemplo:
-
-> Obstáculos aparecem em posições aleatórias e devem ser evitados.
 
 Descrição:
 
@@ -162,9 +145,7 @@ Descrição:
 
 ## Itens, alvos ou objetos de interação
 
-Exemplo:
 
-> Moedas aparecem na tela e aumentam a pontuação quando coletadas.
 
 Descrição:
 
@@ -172,9 +153,6 @@ Descrição:
 
 ## Pontuação, vidas, tempo ou progresso
 
-Exemplo:
-
-> O jogador começa com 3 vidas e ganha 10 pontos por item coletado.
 
 Descrição:
 
@@ -204,24 +182,9 @@ Controles do grupo:
 
 Explique como o grupo pretende organizar o código.
 
-Exemplo:
-
-main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo.
-config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e outras constantes.
-jogo.py: Contém o loop principal do jogo e gerencia a transição e o estado das diferentes telas (ex: menu, jogo, fim de jogo).
-cartas.py: Módulo responsável pela lógica das cartas, incluindo sua criação, embaralhamento, virar/desvirar e verificação de pares.
-funcoes.py: Módulo para funções auxiliares e utilitárias, como renderização de textos, criação de botões e outros elementos gráficos comuns.
-src/: Diretório que abrigará o código-fonte principal do jogo, incluindo a lógica do loop, regras, sprites e dados específicos.
-assets/: Diretório para armazenar todos os recursos visuais e sonoros do jogo, como imagens das cartas, fontes e efeitos sonoros.
-data/: Diretório para arquivos persistentes, como o registro de recordes ou rankings de jogadores.
-tests/: Diretório para os testes unitários do projeto, utilizando a ferramenta pytest.
-docs/: Diretório para a documentação do projeto, incluindo esta proposta inicial e outros documentos relevantes.
-
-
-
 Organização planejada:
 
-> Escreva aqui.
+> main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo. config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e outras constantes. jogo.py: Contém o loop principal do jogo e gerencia a transição e o estado das diferentes telas (ex: menu, jogo, fim de jogo).cartas.py: Módulo responsável pela lógica das cartas, incluindo sua criação, embaralhamento, virar/desvirar e verificação de pares. funcoes.py: Módulo para funções auxiliares e utilitárias, como renderização de textos, criação de botões e outros elementos gráficos comuns. src/: Diretório que abrigará o código-fonte principal do jogo, incluindo a lógica do loop, regras, sprites e dados específicos. assets/: Diretório para armazenar todos os recursos visuais e sonoros do jogo, como imagens das cartas, fontes e efeitos sonoros. data/: Diretório para arquivos persistentes, como o registro de recordes ou rankings de jogadores. tests/: Diretório para os testes unitários do projeto, utilizando a ferramenta pytest. docs/: Diretório para a documentação do projeto, incluindo esta proposta inicial e outros documentos relevantes.
 
 
 ## 12. Recursos externos previstos
@@ -253,9 +216,6 @@ Descreva qual será a versão mínima aceitável do jogo.
 
 Esta seção é importante para evitar que o grupo escolha uma ideia grande demais.
 
-Exemplo:
-
-> A versão mínima do jogo terá um personagem controlado pelo teclado, obstáculos aparecendo na tela, sistema de vidas, sistema de pontuação e tela de fim de jogo.
 
 Escopo mínimo:
 
