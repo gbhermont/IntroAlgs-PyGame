@@ -11,7 +11,6 @@ Match Up
 - Nome 2:Kemily Eduardo da Luz
 - Nome 3:Maria Clara Soalheiro Bessa
 - Nome 4:Armando Schoenstatt Rodrigues e Moreira
->>>>>>> c4918354f5ac20851a19df3e18cc0232605adc45
 
 ## 3. Tipo de jogo
 
