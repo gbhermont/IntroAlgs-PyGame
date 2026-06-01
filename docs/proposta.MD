@@ -238,24 +238,15 @@ Caso não pretenda utilizar recursos externos, escreva:
 
 ## 13. Principais dificuldades esperadas
 
-Liste as dificuldades que o grupo acredita que poderá enfrentar.
-
-Exemplos:
-
-- movimentação do jogador;
-- colisão entre objetos;
-- controle de tempo;
-- criação do ranking;
-- organização do código;
-- uso do GitHub;
-- testes;
-- exibição de textos na tela.
-
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Embaralhamento das cartas
+- Dificuldade 2: Considerar 2 cartas como um "par certo"
+- Dificuldade 3: Divisão de tarefas/produção do código em grupo
+- Dificuldade 4: Uso da biblioteca PyGame e produção da interface gráfica
+- Dificuldade 5: Organização do código/projeto em múltiplos arquivos
+- Dificuldade 6: Organização do ranking do tempo
+- Dificuldade 7: Contabilizar os erros
 
 ## 14. Escopo mínimo para a entrega final
 
