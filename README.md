@@ -16,6 +16,10 @@ Tipo de jogo: Jogo de Memória
 ## Estrutura do projeto
 
 - `main.py`: ponto de entrada da aplicação.
+- `config.py`: guardará as configurações principais, como tamanho da tela, cores e FPS.
+- `jogo.py`: terá o loop principal e o controle das telas.
+- `cartas.py`: cuidará da criação, embaralhamento e verificação dos pares de cartas.
+- `funcoes.py`: terá funções auxiliares, como desenhar textos e botões. 
 - `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
 - `assets/`: imagens, fontes e sons.
 - `data/`: arquivos persistentes (recorde/ranking).
