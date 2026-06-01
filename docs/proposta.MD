@@ -267,7 +267,7 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+> A versão mínima do jogo terá um tabuleiro com cartas embaralhadas, clique do mouse para virar as cartas, verificação de pares iguais e contagem de tentativas. As cartas deverão voltar a ficar escondidas quando forem diferentes e permanecer visíveis quando formarem um par. Ao encontrar todos os pares, será exibida uma mensagem de vitória e a opção de reiniciar ou encerrar o jogo.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
