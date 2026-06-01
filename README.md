@@ -10,6 +10,7 @@ Nome 1: Gabriel de Souza Junqueira Hermont -
 Nome 2: Kemily Eduardo da Luz - 
 Nome 3: Maria Clara Soalheiro Bessa - 
 Nome 4: Armando Schoenstatt Rodrigues e Moreira 
+
 Tipo de jogo: Jogo de Memória 
 
 ## Estrutura do projeto
@@ -63,6 +64,8 @@ Exemplo:
 
 - Click do mouse
 - ESC: sair do jogo
+- Botão fechar janela (X): encerrar o jogo
+- Botão de reiniciar (mouse): iniciar uma nova partida. 
 
 ## Como executar o projeto
 
