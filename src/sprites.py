@@ -2,7 +2,7 @@ import pygame
 import random
 
 # Importa as constantes de configuração da tela e cores definidas em config.py
-from src.config import LARGURA_TELA, ALTURA_TELA, CARTA
+from src.config import LARGURA_TELA, ALTURA_TELA
 
 # --- Configurações do tabuleiro ---
 COLUNAS = 4               # Número de colunas de cartas
@@ -41,7 +41,7 @@ SPRITE_VERSO = (400, 0, 100, 100)
 #   scale: fator de escala (1 = tamanho original)
 # Retorna: Surface do pygame com o sprite recortado
 
-def pegar_sprite(local_arquivo, x, y, width, height, scale=1):
+def pegar_sprite(local_arquivo, x, y, width, height):
     """Corta um único elemento de uma spritesheet BMP e remove o fundo."""
 
     # 1. Carrega o BMP e usa .convert() (sem alpha) para otimizar a velocidade
@@ -60,12 +60,6 @@ def pegar_sprite(local_arquivo, x, y, width, height, scale=1):
 
     # Dizemos ao Pygame para ignorar essa cor específica na hora de desenhar
     image.set_colorkey(cor_do_fundo)
-
-    # 5. Aplica o redimensionamento, se houver
-    if scale != 1:
-        novo_largura = int(width * scale)
-        novo_altura = int(height * scale)
-        image = pygame.transform.scale(image, (novo_largura, novo_altura))
 
     return image
 
@@ -99,12 +93,7 @@ class Carta:
         else:
             tela.blit(self.imagem_verso, self.retangulo)
 
-        # Desenha uma borda roxa ao redor da carta para destacá-la visualmente
-        pygame.draw.rect(tela, CARTA, self.retangulo, 3, border_radius=6)
-
-    def foi_clicada(self, pos_mouse):
-        """Retorna True se a posição do clique do mouse está dentro da carta."""
-        return self.retangulo.collidepoint(pos_mouse)
+        # TODO: borda e detecção de clique serão adicionadas ao integrar com jogo.py
 
 
 # FUNÇÃO: criar_tabuleiro
@@ -153,10 +142,3 @@ def criar_tabuleiro():
 
     return cartas
 
-
-# FUNÇÃO: desenhar_cartas
-# Percorre todas as cartas e manda cada uma se desenhar na tela.
-
-def desenhar_cartas(tela, cartas):
-    for carta in cartas:
-        carta.desenhar(tela)
