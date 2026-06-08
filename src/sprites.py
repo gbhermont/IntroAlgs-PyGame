@@ -142,3 +142,8 @@ def criar_tabuleiro():
 
     return cartas
 
+#desenhar as cartas na tela
+def desenhar_cartas(tela, cartas):
+    """Desenha todas as cartas na tela."""
+    for carta in cartas:
+        carta.desenhar(tela)
