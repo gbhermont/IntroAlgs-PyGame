@@ -1,5 +1,4 @@
 import pygame
-import sys
 import src.dados as dados
 
 from src.config import (
@@ -13,6 +12,8 @@ from src.config import (
     TEXTO,
 )
 
+from src.funcoes import desenhar_botao, desenhar_tentativas
+
 def executar_jogo():
     """Executa o loop principal do jogo: verificar eventos, desenhar tela, atualizar tela, controlar FPS"""
     pygame.init()
@@ -24,6 +25,7 @@ def executar_jogo():
     
     dados.inicializar_tabuleiro()
 
+    tentativas = 0
     rodando = True
 
     """Loop principal do jogo"""
@@ -43,8 +45,8 @@ def executar_jogo():
                 if evento.button == 1: 
                     detectar_clique(evento.pos)
         
-        atualizar_jogo(tela)
-        desenhar_elementos(tela)
+        atualizar_jogo(tela, tentativas)
+        desenhar_elementos(tela, tentativas)
 
     pygame.quit()
 
@@ -63,11 +65,11 @@ def detectar_clique(pos_mouse):
                     dados.cartas_selecionadas.append(i)
 
 
-def atualizar_jogo(tela):
+def atualizar_jogo(tela, tentativas):
     """Verifica se o par de cartas escolhido é igual ou diferente"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela)
+        desenhar_elementos(tela, tentativas)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -88,7 +90,7 @@ def atualizar_jogo(tela):
         dados.cartas_selecionadas.clear()
 
 
-def desenhar_elementos(tela):
+def desenhar_elementos(tela, tentativas):
     """Desenha o fundo da janela e o estado atual de todas as cartas"""
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
@@ -107,7 +109,8 @@ def desenhar_elementos(tela):
             pygame.draw.rect(
                 tela, CARTA, (carta["x"], carta["y"], carta["largura"], carta["altura"])
             )
-
+    desenhar_tentativas(tela, tentativas, fonte)
+    desenhar_botao(tela)
     pygame.display.update()
 
 executar_jogo()

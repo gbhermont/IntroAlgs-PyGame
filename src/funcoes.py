@@ -30,15 +30,15 @@ def verificar_colisao(retangulo_1, retangulo_2):
 #DESENVOLVIMENTO DO PROJETO JOGO DA MEMÓRIA
 
 import pygame
-fonte = pygame.font.SysFont("Arial", 32, True, False)
 
 def desenhar_botao(tela):
+    fonte = pygame.font.SysFont("Arial", 32, True, False)
     '''a função recebe a tela, define a posição do botão, desenha ele e retorna o retângulo do botão para ser usado na detecção de clique'''
     retangulo_botao = pygame.Rect(320, 540, 160, 40) 
     pygame.draw.rect(tela, (100, 100, 100), retangulo_botao, border_radius=8)
     '''escrever reiniciar no centro do botao'''
     texto_botao = fonte.render("Reiniciar", True, (255, 255, 255))
-    texto_posicao = texto_botao.get_rect(center=botao.center) #posicao da caixa do botao
+    texto_posicao = texto_botao.get_rect(center=retangulo_botao.center) #posicao da caixa do botao
     tela.blit(texto_botao, texto_posicao)
     return retangulo_botao
 
@@ -60,5 +60,6 @@ def desenhar_texto(tela,texto,x,y,cor,fonte):
 def somar_tentativa(cartas_selecionadas, tentativas):
     if cartas_selecionadas == 2:
         tentativas +=1
-        return tentativas
+
+    return tentativas
     
