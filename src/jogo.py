@@ -61,6 +61,8 @@ def executar_jogo():
 
 def detectar_clique(pos_mouse):
     """Passa por todas as cartas para ver se o mouse clicou em alguma"""
+    if len(dados.cartas_selecionadas) >= 2: #essa verificacao faz com que o sistema não deixe o jogador continuar clicando antes de processar se ele acertou ou não o par
+        return
     for i in range(len(dados.cartas)):
         carta = dados.cartas[i]
         
