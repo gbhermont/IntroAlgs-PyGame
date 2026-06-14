@@ -8,7 +8,6 @@ from src.config import (
     TITULO_JOGO,
     FUNDO,
     CARTA,
-    BOTAO,
     TEXTO,
 )
 
@@ -25,7 +24,9 @@ def executar_jogo():
     
     dados.inicializar_tabuleiro()
 
+
     tentativas = 0
+    venceu = False
     rodando = True
 
     """Loop principal do jogo"""
@@ -42,11 +43,13 @@ def executar_jogo():
                     
             """"Detecta clique do mouse"""
             if evento.type == pygame.MOUSEBUTTONDOWN:
-                if evento.button == 1: 
+                if evento.button == 1 and not venceu: 
                     detectar_clique(evento.pos)
         
-        atualizar_jogo(tela, tentativas)
-        desenhar_elementos(tela, tentativas)
+        if atualizar_jogo(tela, tentativas, venceu):
+            venceu = True
+
+        desenhar_elementos(tela, tentativas, venceu)
 
     pygame.quit()
 
@@ -65,11 +68,11 @@ def detectar_clique(pos_mouse):
                     dados.cartas_selecionadas.append(i)
 
 
-def atualizar_jogo(tela, tentativas):
+def atualizar_jogo(tela, tentativas, venceu):
     """Verifica se o par de cartas escolhido é igual ou diferente"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela, tentativas)
+        desenhar_elementos(tela, tentativas, venceu)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -89,8 +92,12 @@ def atualizar_jogo(tela, tentativas):
 
         dados.cartas_selecionadas.clear()
 
+        if condicao_vitoria():
+            return True
+    return False
 
-def desenhar_elementos(tela, tentativas):
+
+def desenhar_elementos(tela, tentativas, venceu):
     """Desenha o fundo da janela e o estado atual de todas as cartas"""
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
@@ -109,8 +116,22 @@ def desenhar_elementos(tela, tentativas):
             pygame.draw.rect(
                 tela, CARTA, (carta["x"], carta["y"], carta["largura"], carta["altura"])
             )
+
+    if venceu:
+        texto_vitoria = fonte.render("Você venceu!", True, TEXTO)
+        posicao = texto_vitoria.get_rect(center=(LARGURA_TELA // 2, 80))
+        tela.blit(texto_vitoria, posicao)
+
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)
     pygame.display.update()
 
+
+def condicao_vitoria():
+    """Verifica se todas as cartas estão com os pares encontrados, se sim, aparece uma mensagem informando que o jogador venceu o jogo"""
+    for carta in dados.cartas:
+        if not carta["descoberta"]:
+            return False
+    return True
+ 
 executar_jogo()
