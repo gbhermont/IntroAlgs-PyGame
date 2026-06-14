@@ -63,3 +63,11 @@ def somar_tentativa(cartas_selecionadas, tentativas):
 
     return tentativas
     
+def reiniciar_jogo(tentativas):
+    "zera as tentativas e redefine o tabuleiro"
+    "a funcao usa tentativas como parametro para resetar o contador de tentativas e retorna ele zerado"
+    import src.dados as dados
+    dados.cartas.clear() #limpa a lista de cartas para reiniciar o jogo
+    dados.cartas_selecionadas.clear() #limpa a lista de cartas selecionadas
+    dados.inicializar_tabuleiro() #inicia o tabuleiro dnv
+    return 0 #retorna 0 para resetar as tentativas
