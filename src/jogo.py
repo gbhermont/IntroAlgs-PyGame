@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 import src.dados as dados
 
 from src.config import (
@@ -11,14 +11,25 @@ from src.config import (
     TEXTO,
 )
 
-from src.funcoes import desenhar_botao, desenhar_tentativas, somar_tentativa, reiniciar_jogo
+from src.funcoes import (
+    desenhar_botao,
+    desenhar_tentativas,
+    somar_tentativa,
+    reiniciar_jogo,
+)
+
 
 def detectar_clique_reiniciar(pos_mouse, tentativas):
-    "Detecta se o clique do mouse foi no botão de reiniciar e, se sim, reinicia o jogo"
-    retangulo_botao = pygame.Rect(320, 540, 160, 40) 
+    """Detecta se o clique do mouse foi no botão de reiniciar usando a posição atualizada"""
+    # Deixe essa caixinha com o mesmo tamanho que definimos em funcoes.py
+    retangulo_botao = pygame.Rect(350, 645, 200, 45)
     if retangulo_botao.collidepoint(pos_mouse):
-        return reiniciar_jogo(tentativas)
-    return tentativas
+        dados.cartas.clear()
+        dados.cartas_selecionadas.clear()
+        dados.inicializar_tabuleiro()
+        return 0, False  
+    return tentativas, None
+
 
 def executar_jogo():
     """Executa o loop principal do jogo: verificar eventos, desenhar tela, atualizar tela, controlar FPS"""
@@ -28,9 +39,8 @@ def executar_jogo():
     pygame.display.set_caption(TITULO_JOGO)
 
     relogio = pygame.time.Clock()
-    
-    dados.inicializar_tabuleiro()
 
+    dados.inicializar_tabuleiro()
 
     tentativas = 0
     venceu = False
@@ -47,30 +57,41 @@ def executar_jogo():
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_ESCAPE:
                     rodando = False
-                    
+
             """"Detecta clique do mouse"""
             if evento.type == pygame.MOUSEBUTTONDOWN:
+                if evento.button == 1:
+                    # 1. Checa primeiro se clicou em reiniciar (funciona mesmo se já tiver vencido)
+                    novas_tentativas, mudou_estado = detectar_clique_reiniciar(
+                        evento.pos, tentativas
+                    )
+                    if mudou_estado is False:
+                        tentativas = novas_tentativas
+                        venceu = False
+                        continue  # Pula o resto para não clicar em cartas sem querer
 
-                if evento.button == 1 and not venceu:
-                    tentativas = detectar_clique_reiniciar(evento.pos, tentativas) 
-                    detectar_clique(evento.pos)
-        
-        if atualizar_jogo(tela, tentativas, venceu):
+                    # 2. Só deixa clicar nas cartas se o jogo ainda não acabou
+                    if not venceu:
+                        detectar_clique(evento.pos)
+
+        # Correção: tentativas agora é atualizada de forma segura
+        tentativas = atualizar_jogo(tela, tentativas, venceu)
+
+        if condicao_vitoria():
             venceu = True
 
         desenhar_elementos(tela, tentativas, venceu)
-
 
     pygame.quit()
 
 
 def detectar_clique(pos_mouse):
     """Passa por todas as cartas para ver se o mouse clicou em alguma"""
-    if len(dados.cartas_selecionadas) >= 2: #essa verificacao faz com que o sistema não deixe o jogador continuar clicando antes de processar se ele acertou ou não o par
+    if len(dados.cartas_selecionadas) >= 2:
         return
     for i in range(len(dados.cartas)):
         carta = dados.cartas[i]
-        
+
         """Verifica se o clique bateu dentro do quadrado da carta"""
         if carta["x"] <= pos_mouse[0] <= carta["x"] + carta["largura"]:
             if carta["y"] <= pos_mouse[1] <= carta["y"] + carta["altura"]:
@@ -81,7 +102,7 @@ def detectar_clique(pos_mouse):
 
 
 def atualizar_jogo(tela, tentativas, venceu):
-    """Verifica se o par de cartas escolhido é igual ou diferente"""
+    """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
     if len(dados.cartas_selecionadas) == 2:
 
         desenhar_elementos(tela, tentativas, venceu)
@@ -102,41 +123,29 @@ def atualizar_jogo(tela, tentativas, venceu):
             carta1["virada"] = False
             carta2["virada"] = False
 
-        tentativas = somar_tentativa(len(dados.cartas_selecionadas), tentativas) #usa a funcao que soma as tentativas (tem q deixar antes do clear)
+        tentativas = somar_tentativa(len(dados.cartas_selecionadas), tentativas)
         dados.cartas_selecionadas.clear()
 
-
-        if condicao_vitoria():
-            return True
-    return False
-
-    return tentativas
-
+    return tentativas  
 
 
 def desenhar_elementos(tela, tentativas, venceu):
-    """Desenha o fundo da janela e o estado atual de todas as cartas"""
+    """Desenha o fundo da janela e o estado atual de todas as cartas usando imagens"""
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
 
     for carta in dados.cartas:
-        """Desenha a carta aberta mostrando o seu número"""
+        posicao_carta = (carta["x"], carta["y"])
+
         if carta["virada"] or carta["descoberta"]:
-            pygame.draw.rect(
-                tela,
-                (240, 240, 240),
-                (carta["x"], carta["y"], carta["largura"], carta["altura"]),
-            )
-            txt = fonte.render(str(carta["id"]), True, TEXTO)
-            tela.blit(txt, (carta["x"] + 40, carta["y"] + 25))
+            imagem_frente = dados.imagens_frente[carta["id"]]
+            tela.blit(imagem_frente, posicao_carta)
         else:
-            pygame.draw.rect(
-                tela, CARTA, (carta["x"], carta["y"], carta["largura"], carta["altura"])
-            )
+            tela.blit(dados.imagens_verso, posicao_carta)
 
     if venceu:
         texto_vitoria = fonte.render("Você venceu!", True, TEXTO)
-        posicao = texto_vitoria.get_rect(center=(LARGURA_TELA // 2, 80))
+        posicao = texto_vitoria.get_rect(center=(LARGURA_TELA // 2, 45))
         tela.blit(texto_vitoria, posicao)
 
     desenhar_tentativas(tela, tentativas, fonte)
@@ -145,10 +154,10 @@ def desenhar_elementos(tela, tentativas, venceu):
 
 
 def condicao_vitoria():
-    """Verifica se todas as cartas estão com os pares encontrados, se sim, aparece uma mensagem informando que o jogador venceu o jogo"""
+    """Verifica se todas as cartas estão com os pares encontrados"""
+    if len(dados.cartas) == 0:
+        return False
     for carta in dados.cartas:
         if not carta["descoberta"]:
             return False
     return True
- 
-
