@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 import src.dados as dados
 
 from src.config import (
