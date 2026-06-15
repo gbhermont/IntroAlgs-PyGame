@@ -2,7 +2,7 @@ import pygame
 import random
 
 # Puxa as medidas da tela que ficam guardadas no config.py
-from src.config import Largura_tela, Altura_tela
+from src.config import LARGURA_TELA, ALTURA_TELA
 
 # Aqui definimos como o tabuleiro vai ser montado.
 Colunas = 4
@@ -102,8 +102,8 @@ def criar_tabuleiro():
     altura_total  = Linhas  * Altura_Carta  + (Linhas  - 1) * Espaco
 
     # descobre quanto deslocar pra deixar o tabuleiro centralizado na tela
-    offset_x = (Largura_tela - largura_total) // 2
-    offset_y  = (Altura_tela  - altura_total)  // 2
+    offset_x = (LARGURA_TELA - largura_total) // 2
+    offset_y  = (ALTURA_TELA  - altura_total)  // 2
 
     # posiciona cada carta na sua linha e coluna dentro do grid
     cartas = []

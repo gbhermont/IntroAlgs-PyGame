@@ -1,4 +1,15 @@
 import random
+import pygame
+
+# Caminhos dos arquivos de recorde e ranking
+Caminho_Recorde = "data/recorde.txt"
+Caminho_Ranking = "data/ranking.txt"
+
+cartas = []
+cartas_selecionadas = []
+
+imagens_frente = {}
+imagens_verso = None
 
 def salvar_recorde(caminho_arquivo, pontuacao):
     """Salva a pontuação recorde em arquivo texto."""
@@ -19,37 +30,93 @@ def carregar_recorde(caminho_arquivo):
     except FileNotFoundError:
         return 0
 
-cartas = []
-cartas_selecionadas = [] 
 
+# Verifica se o jogador bateu o recorde e salva se sim
+def verificar_e_salvar_recorde(tempo_segundos):
+    recorde_atual = carregar_recorde(Caminho_Recorde)
+    novo_recorde = recorde_atual == 0 or tempo_segundos < recorde_atual
+    if novo_recorde:
+        salvar_recorde(Caminho_Recorde, tempo_segundos)
+    return novo_recorde
+
+
+# Adiciona o tempo da partida no ranking
+def salvar_no_ranking(tempo_segundos):
+    with open(Caminho_Ranking, "a", encoding="utf-8") as arquivo:
+        arquivo.write(str(tempo_segundos) + "\n")
+
+
+def imagem_com_bordas_arredondadas(imagem, raio):
+    """Cria uma cópia da imagem com as bordas arredondadas usando o raio definido."""
+    # Cria uma superfície do mesmo tamanho com suporte a transparência
+    rect = imagem.get_rect()
+    superficie_alvo = pygame.Surface(rect.size, pygame.SRCALPHA)
+    
+    # Desenha um retângulo com cantos arredondados na nova superfície (cor branca total)
+    pygame.draw.rect(superficie_alvo, (255, 255, 255, 255), rect, border_radius=raio)
+    
+    # Aplica a imagem original por cima, cortando apenas onde o retângulo foi desenhado
+    superficie_alvo.blit(imagem, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
+    
+    return superficie_alvo
+
+def carregar_recursos_imagens():
+    """Carrega as imagens da pasta assets e arredonda suas bordas"""
+    global imagens_frente, imagens_verso
+    
+    tamanho_carta = (180, 180)
+    raio_borda = 10 
+    
+    try:
+        # 1. Carrega, redimensiona e arredonda o VERSO
+        img_verso_crua = pygame.image.load("assets/imagens/verso.jpg")
+        img_verso_redimensionada = pygame.transform.scale(img_verso_crua, tamanho_carta)
+        imagens_verso = imagem_com_bordas_arredondadas(img_verso_redimensionada, raio_borda)
+        
+        # 2. Carrega, redimensiona e arredonda as FRENTES
+        for i in range(1, 7):
+            img_crua = pygame.image.load(f"assets/imagens/img{i}.jpg")
+            img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
+            
+            # Guarda no dicionário já com a borda cortada arredondada!
+            imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
+            
+    except pygame.error as e:
+        print(f"Erro ao carregar imagens: {e}")
+        
 def inicializar_tabuleiro():
-    """Gera as cartas, define suas posições na tela e embaralha"""
+    """Gera as cartas para um grid de 4 colunas e 3 linhas centralizado com tamanho 130x130"""
     global cartas, cartas_selecionadas
+    
+    carregar_recursos_imagens()
+    
+    # 6 pares de IDs (total de 12 cartas)
     valores = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
     random.shuffle(valores)  
     
     coluna = 0
     linha = 0
     
+    margem_x = 120
+    margem_y = 80 
+    espacamento = 12
+    
     for valor in valores:
-        """Calcula a posição X e Y de cada carta na tela"""
-        x = 100 + coluna * 120
-        y = 160 + linha * 120
+        x = margem_x + coluna * (180 + espacamento)
+        y = margem_y + linha * (180 + espacamento)
 
-        """Cria o dicionário com os dados individuais da carta"""
         carta = {
             'id': valor,
             'x': x,
             'y': y,
-            'largura': 100,
-            'altura': 100,
+            'largura': 180, 
+            'altura': 180, 
             'virada': False,    
-            'descoberta': False   
+            'descoberta': False 
         }
         cartas.append(carta)
         
-        """Organiza o desenho em 4 colunas por linha"""
-        coluna = coluna + 1
-        if coluna == 6:
+        coluna += 1
+        if coluna == 4: # QUEBRA A LINHA A CADA 4 COLUNAS
             coluna = 0
-            linha = linha + 1
+            linha += 1
