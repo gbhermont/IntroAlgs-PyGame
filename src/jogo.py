@@ -9,6 +9,7 @@ from src.config import (
     FUNDO,
     CARTA,
     TEXTO,
+    BOTAO,
 )
 
 from src.funcoes import (
@@ -21,7 +22,6 @@ from src.funcoes import (
 
 def detectar_clique_reiniciar(pos_mouse, tentativas):
     """Detecta se o clique do mouse foi no botão de reiniciar usando a posição atualizada"""
-    # Deixe essa caixinha com o mesmo tamanho que definimos em funcoes.py
     retangulo_botao = pygame.Rect(350, 645, 200, 45)
     if retangulo_botao.collidepoint(pos_mouse):
         dados.cartas.clear()
@@ -128,6 +128,34 @@ def atualizar_jogo(tela, tentativas, venceu):
 
     return tentativas  
 
+def desenhar_card_vitoria(tela, tentativas):
+    """Desenha um pop-up gráfico (card) centralizado com os resultados do jogo."""
+    # 1. Configuração de tamanho e posição do Card
+    largura_card, altura_card = 500, 250
+    x_card = (LARGURA_TELA - largura_card) // 2
+    y_card = (ALTURA_TELA - altura_card) // 2
+    rect_card = pygame.Rect(x_card, y_card, largura_card, altura_card)
+    
+    # 2. Desenho do Card 
+    pygame.draw.rect(tela, (224, 242, 241), rect_card, border_radius=20)
+    
+    # 3. Fontes e Textos
+    fonte_titulo = pygame.font.SysFont("Arial", 36, bold=True)
+    fonte_dados = pygame.font.SysFont("Arial", 26)
+    
+    texto_titulo = fonte_titulo.render("Parabéns!", True, (120, 220, 255))
+    texto_subtitulo = fonte_dados.render("Você encontrou todos os pares!", True, TEXTO)
+    texto_resultado = fonte_dados.render(f"Total de tentativas: {tentativas}", True, TEXTO)
+    
+    # 4. Posicionamento Relativo
+    pos_titulo = texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50))
+    pos_subtitulo = texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 110))
+    pos_resultado = texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 160))
+    
+    # 5. Renderização na Tela
+    tela.blit(texto_titulo, pos_titulo)
+    tela.blit(texto_subtitulo, pos_subtitulo)
+    tela.blit(texto_resultado, pos_resultado)
 
 def desenhar_elementos(tela, tentativas, venceu):
     """Desenha o fundo da janela e o estado atual de todas as cartas usando imagens"""
@@ -144,9 +172,7 @@ def desenhar_elementos(tela, tentativas, venceu):
             tela.blit(dados.imagens_verso, posicao_carta)
 
     if venceu:
-        texto_vitoria = fonte.render("Você venceu!", True, TEXTO)
-        posicao = texto_vitoria.get_rect(center=(LARGURA_TELA // 2, 45))
-        tela.blit(texto_vitoria, posicao)
+        desenhar_card_vitoria(tela, tentativas)
 
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)

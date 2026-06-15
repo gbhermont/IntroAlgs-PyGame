@@ -26,20 +26,41 @@ def carregar_recorde(caminho_arquivo):
     except FileNotFoundError:
         return 0
 
+def imagem_com_bordas_arredondadas(imagem, raio):
+    """Cria uma cópia da imagem com as bordas arredondadas usando o raio definido."""
+    # Cria uma superfície do mesmo tamanho com suporte a transparência
+    rect = imagem.get_rect()
+    superficie_alvo = pygame.Surface(rect.size, pygame.SRCALPHA)
+    
+    # Desenha um retângulo com cantos arredondados na nova superfície (cor branca total)
+    pygame.draw.rect(superficie_alvo, (255, 255, 255, 255), rect, border_radius=raio)
+    
+    # Aplica a imagem original por cima, cortando apenas onde o retângulo foi desenhado
+    superficie_alvo.blit(imagem, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
+    
+    return superficie_alvo
 
 def carregar_recursos_imagens():
-    """Carrega as imagens da pasta assets e armazena em um dicionário utilizando o ID como chave."""
+    """Carrega as imagens da pasta assets e arredonda suas bordas"""
     global imagens_frente, imagens_verso
     
     tamanho_carta = (180, 180)
+    raio_borda = 10 
     
     try:
-        imagens_verso = pygame.image.load("assets/imagens/verso.jpg")
-        imagens_verso = pygame.transform.scale(imagens_verso, tamanho_carta)
+        # 1. Carrega, redimensiona e arredonda o VERSO
+        img_verso_crua = pygame.image.load("assets/imagens/verso.jpg")
+        img_verso_redimensionada = pygame.transform.scale(img_verso_crua, tamanho_carta)
+        imagens_verso = imagem_com_bordas_arredondadas(img_verso_redimensionada, raio_borda)
         
+        # 2. Carrega, redimensiona e arredonda as FRENTES
         for i in range(1, 7):
-            img = pygame.image.load(f"assets/imagens/img{i}.jpg")
-            imagens_frente[i] = pygame.transform.scale(img, tamanho_carta)
+            img_crua = pygame.image.load(f"assets/imagens/img{i}.jpg")
+            img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
+            
+            # Guarda no dicionário já com a borda cortada arredondada!
+            imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
+            
     except pygame.error as e:
         print(f"Erro ao carregar imagens: {e}")
         

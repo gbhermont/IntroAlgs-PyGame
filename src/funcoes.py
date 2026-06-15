@@ -26,9 +26,6 @@ def verificar_colisao(retangulo_1, retangulo_2):
     """Verifica sobreposição entre dois retângulos do Pygame."""
     return retangulo_1.colliderect(retangulo_2)
 
-
-#DESENVOLVIMENTO DO PROJETO JOGO DA MEMÓRIA
-
 import pygame
 
 def desenhar_botao(tela):

@@ -7,6 +7,6 @@ TITULO_JOGO = "Match Up - Pygame"
 
 FUNDO = (160, 220, 255)      # azul
 CARTA = (221, 160, 221)      # lilás
-BOTAO = (160, 100, 255)       # roxo 
+BOTAO = (160, 220, 255)        # roxo 
 TEXTO = (45, 45, 45)         # cinza escuro
 
