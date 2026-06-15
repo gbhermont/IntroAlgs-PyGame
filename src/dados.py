@@ -1,6 +1,10 @@
 import random
 import pygame
 
+# Caminhos dos arquivos de recorde e ranking
+Caminho_Recorde = "data/recorde.txt"
+Caminho_Ranking = "data/ranking.txt"
+
 cartas = []
 cartas_selecionadas = []
 
@@ -25,6 +29,22 @@ def carregar_recorde(caminho_arquivo):
 
     except FileNotFoundError:
         return 0
+
+
+# Verifica se o jogador bateu o recorde e salva se sim
+def verificar_e_salvar_recorde(tempo_segundos):
+    recorde_atual = carregar_recorde(Caminho_Recorde)
+    novo_recorde = recorde_atual == 0 or tempo_segundos < recorde_atual
+    if novo_recorde:
+        salvar_recorde(Caminho_Recorde, tempo_segundos)
+    return novo_recorde
+
+
+# Adiciona o tempo da partida no ranking
+def salvar_no_ranking(tempo_segundos):
+    with open(Caminho_Ranking, "a", encoding="utf-8") as arquivo:
+        arquivo.write(str(tempo_segundos) + "\n")
+
 
 def imagem_com_bordas_arredondadas(imagem, raio):
     """Cria uma cópia da imagem com as bordas arredondadas usando o raio definido."""

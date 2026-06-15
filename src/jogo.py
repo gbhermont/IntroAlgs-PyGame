@@ -44,6 +44,11 @@ def executar_jogo():
 
     tentativas = 0
     venceu = False
+    jogo_finalizado = False
+
+    # salva o momento em que a partida começa para calcular o tempo depois
+    tempo_inicio = pygame.time.get_ticks()
+
     rodando = True
 
     """Loop principal do jogo"""
@@ -74,13 +79,20 @@ def executar_jogo():
                     if not venceu:
                         detectar_clique(evento.pos)
 
+        # calcula quantos segundos se passaram desde o início
+        tempo_atual = (pygame.time.get_ticks() - tempo_inicio) // 1000
+
         # Correção: tentativas agora é atualizada de forma segura
         tentativas = atualizar_jogo(tela, tentativas, venceu)
 
-        if condicao_vitoria():
+        if condicao_vitoria() and not jogo_finalizado:
             venceu = True
+            jogo_finalizado = True
+            # salva o tempo no ranking e verifica se bateu o recorde
+            dados.salvar_no_ranking(tempo_atual)
+            dados.verificar_e_salvar_recorde(tempo_atual)
 
-        desenhar_elementos(tela, tentativas, venceu)
+        desenhar_elementos(tela, tentativas, venceu, tempo_atual)
 
     pygame.quit()
 
@@ -105,7 +117,7 @@ def atualizar_jogo(tela, tentativas, venceu):
     """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela, tentativas, venceu)
+        desenhar_elementos(tela, tentativas, venceu, 0)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -157,7 +169,7 @@ def desenhar_card_vitoria(tela, tentativas):
     tela.blit(texto_subtitulo, pos_subtitulo)
     tela.blit(texto_resultado, pos_resultado)
 
-def desenhar_elementos(tela, tentativas, venceu):
+def desenhar_elementos(tela, tentativas, venceu, tempo):
     """Desenha o fundo da janela e o estado atual de todas as cartas usando imagens"""
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
@@ -176,6 +188,18 @@ def desenhar_elementos(tela, tentativas, venceu):
 
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)
+
+    # exibe o tempo decorrido no canto superior esquerdo
+    fonte_tempo = pygame.font.SysFont("Arial", 32)
+    texto_tempo = fonte_tempo.render(f"Tempo: {tempo}s", True, TEXTO)
+    tela.blit(texto_tempo, (20, 20))
+
+    # carrega e exibe o recorde salvo logo abaixo do tempo
+    recorde = dados.carregar_recorde("data/recorde.txt")
+    if recorde > 0:
+        texto_recorde = fonte_tempo.render(f"Recorde: {recorde}s", True, TEXTO)
+        tela.blit(texto_recorde, (20, 60))
+
     pygame.display.update()
 
 
