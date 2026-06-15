@@ -97,8 +97,8 @@ def inicializar_tabuleiro():
     coluna = 0
     linha = 0
     
-    margem_x = 120
-    margem_y = 80 
+    margem_x = 320
+    margem_y = 120
     espacamento = 12
     
     for valor in valores:

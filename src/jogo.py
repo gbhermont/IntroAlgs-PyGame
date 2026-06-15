@@ -17,12 +17,14 @@ from src.funcoes import (
     desenhar_tentativas,
     somar_tentativa,
     reiniciar_jogo,
+    condicao_vitoria,
+    passar_fase,
 )
 
 
 def detectar_clique_reiniciar(pos_mouse, tentativas):
     """Detecta se o clique do mouse foi no botão de reiniciar usando a posição atualizada"""
-    retangulo_botao = pygame.Rect(350, 645, 200, 45)
+    retangulo_botao = pygame.Rect(600, 30, 200, 45)
     if retangulo_botao.collidepoint(pos_mouse):
         dados.cartas.clear()
         dados.cartas_selecionadas.clear()
@@ -201,13 +203,3 @@ def desenhar_elementos(tela, tentativas, venceu, tempo):
         tela.blit(texto_recorde, (20, 60))
 
     pygame.display.update()
-
-
-def condicao_vitoria():
-    """Verifica se todas as cartas estão com os pares encontrados"""
-    if len(dados.cartas) == 0:
-        return False
-    for carta in dados.cartas:
-        if not carta["descoberta"]:
-            return False
-    return True
