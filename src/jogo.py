@@ -29,8 +29,9 @@ def detectar_clique_reiniciar(pos_mouse, tentativas):
         dados.cartas.clear()
         dados.cartas_selecionadas.clear()
         dados.inicializar_tabuleiro()
-        return 0, False  
-    return tentativas, None
+        novo_tempo_inicio = pygame.time.get_ticks()
+        return 0, False, novo_tempo_inicio
+    return tentativas, None, None
 
 
 def executar_jogo():
@@ -48,7 +49,7 @@ def executar_jogo():
     venceu = False
     jogo_finalizado = False
 
-    # salva o momento em que a partida começa para calcular o tempo depois
+    """tempo do jogo começa a contar a partir do momento que o jogo inicia"""
     tempo_inicio = pygame.time.get_ticks()
 
     rodando = True
@@ -69,28 +70,29 @@ def executar_jogo():
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if evento.button == 1:
                     # 1. Checa primeiro se clicou em reiniciar (funciona mesmo se já tiver vencido)
-                    novas_tentativas, mudou_estado = detectar_clique_reiniciar(
+                    novas_tentativas, mudou_estado, novo_tempo = detectar_clique_reiniciar(
                         evento.pos, tentativas
                     )
                     if mudou_estado is False:
                         tentativas = novas_tentativas
                         venceu = False
-                        continue  # Pula o resto para não clicar em cartas sem querer
+                        jogo_finalizado = False
+                        tempo_inicio = novo_tempo
+                        continue
 
                     # 2. Só deixa clicar nas cartas se o jogo ainda não acabou
                     if not venceu:
                         detectar_clique(evento.pos)
 
-        # calcula quantos segundos se passaram desde o início
+        """calcula quantos segundos se passaram desde o inicio da partida"""
         tempo_atual = (pygame.time.get_ticks() - tempo_inicio) // 1000
 
-        # Correção: tentativas agora é atualizada de forma segura
-        tentativas = atualizar_jogo(tela, tentativas, venceu)
+        tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual)
 
+        """verifica vitoria"""
         if condicao_vitoria() and not jogo_finalizado:
             venceu = True
             jogo_finalizado = True
-            # salva o tempo no ranking e verifica se bateu o recorde
             dados.salvar_no_ranking(tempo_atual)
             dados.verificar_e_salvar_recorde(tempo_atual)
 
@@ -115,11 +117,11 @@ def detectar_clique(pos_mouse):
                     dados.cartas_selecionadas.append(i)
 
 
-def atualizar_jogo(tela, tentativas, venceu):
+def atualizar_jogo(tela, tentativas, venceu, tempo_atual):
     """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela, tentativas, venceu, 0)
+        desenhar_elementos(tela, tentativas, venceu, tempo_atual)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -191,12 +193,12 @@ def desenhar_elementos(tela, tentativas, venceu, tempo):
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)
 
-    # exibe o tempo decorrido no canto superior esquerdo
+    """exibe o tempo decorrido no canto superior esquerdo"""
     fonte_tempo = pygame.font.SysFont("Arial", 32)
     texto_tempo = fonte_tempo.render(f"Tempo: {tempo}s", True, TEXTO)
     tela.blit(texto_tempo, (20, 20))
 
-    # carrega e exibe o recorde salvo logo abaixo do tempo
+    """carrega e exibe o recorde logo abaixo do tempo"""
     recorde = dados.carregar_recorde("data/recorde.txt")
     if recorde > 0:
         texto_recorde = fonte_tempo.render(f"Recorde: {recorde}s", True, TEXTO)
