@@ -17,19 +17,11 @@ from src.funcoes import (
     desenhar_tentativas,
     somar_tentativa,
     reiniciar_jogo,
+    condicao_vitoria,
+    passar_fase,
+    processar_clique,
+    detectar_clique_reiniciar,
 )
-
-
-def detectar_clique_reiniciar(pos_mouse, tentativas):
-    """Detecta se o clique do mouse foi no botão de reiniciar usando a posição atualizada"""
-    retangulo_botao = pygame.Rect(350, 645, 200, 45)
-    if retangulo_botao.collidepoint(pos_mouse):
-        dados.cartas.clear()
-        dados.cartas_selecionadas.clear()
-        dados.inicializar_tabuleiro()
-        return 0, False  
-    return tentativas, None
-
 
 def executar_jogo():
     """Executa o loop principal do jogo: verificar eventos, desenhar tela, atualizar tela, controlar FPS"""
@@ -46,7 +38,7 @@ def executar_jogo():
     venceu = False
     jogo_finalizado = False
 
-    # salva o momento em que a partida começa para calcular o tempo depois
+    """tempo do jogo começa a contar a partir do momento que o jogo inicia"""
     tempo_inicio = pygame.time.get_ticks()
 
     rodando = True
@@ -66,31 +58,21 @@ def executar_jogo():
             """"Detecta clique do mouse"""
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if evento.button == 1:
-                    # 1. Checa primeiro se clicou em reiniciar (funciona mesmo se já tiver vencido)
-                    novas_tentativas, mudou_estado = detectar_clique_reiniciar(
-                        evento.pos, tentativas
-                    )
-                    if mudou_estado is False:
-                        tentativas = novas_tentativas
-                        venceu = False
-                        continue  # Pula o resto para não clicar em cartas sem querer
+                    tentativas, venceu, jogo_finalizado, tempo_inicio = processar_clique(evento.pos, tentativas, venceu, jogo_finalizado, tempo_inicio, detectar_clique)
 
-                    # 2. Só deixa clicar nas cartas se o jogo ainda não acabou
-                    if not venceu:
-                        detectar_clique(evento.pos)
-
-        # calcula quantos segundos se passaram desde o início
+        """calcula quantos segundos se passaram desde o inicio da partida"""
         tempo_atual = (pygame.time.get_ticks() - tempo_inicio) // 1000
 
-        # Correção: tentativas agora é atualizada de forma segura
-        tentativas = atualizar_jogo(tela, tentativas, venceu)
+        tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual)
 
+        """verifica vitoria"""
         if condicao_vitoria() and not jogo_finalizado:
             venceu = True
             jogo_finalizado = True
-            # salva o tempo no ranking e verifica se bateu o recorde
             dados.salvar_no_ranking(tempo_atual)
             dados.verificar_e_salvar_recorde(tempo_atual)
+            tempo_atual = 0
+            
 
         desenhar_elementos(tela, tentativas, venceu, tempo_atual)
 
@@ -113,11 +95,11 @@ def detectar_clique(pos_mouse):
                     dados.cartas_selecionadas.append(i)
 
 
-def atualizar_jogo(tela, tentativas, venceu):
+def atualizar_jogo(tela, tentativas, venceu, tempo_atual):
     """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela, tentativas, venceu, 0)
+        desenhar_elementos(tela, tentativas, venceu, tempo_atual)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -158,16 +140,19 @@ def desenhar_card_vitoria(tela, tentativas):
     texto_titulo = fonte_titulo.render("Parabéns!", True, (120, 220, 255))
     texto_subtitulo = fonte_dados.render("Você encontrou todos os pares!", True, TEXTO)
     texto_resultado = fonte_dados.render(f"Total de tentativas: {tentativas}", True, TEXTO)
+    texto_tempo_final = fonte_dados.render(f"Tempo total: {tempo_final} segundos", True, TEXTO)
     
     # 4. Posicionamento Relativo
     pos_titulo = texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50))
     pos_subtitulo = texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 110))
     pos_resultado = texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 160))
+    pos_tempo_final = texto_tempo_final.get_rect(center=(rect_card.centerx, rect_card.top + 200))
     
     # 5. Renderização na Tela
     tela.blit(texto_titulo, pos_titulo)
     tela.blit(texto_subtitulo, pos_subtitulo)
     tela.blit(texto_resultado, pos_resultado)
+    tela.blit(texto_tempo_final, pos_tempo_final)
 
 def desenhar_elementos(tela, tentativas, venceu, tempo):
     """Desenha o fundo da janela e o estado atual de todas as cartas usando imagens"""
@@ -184,30 +169,20 @@ def desenhar_elementos(tela, tentativas, venceu, tempo):
             tela.blit(dados.imagens_verso, posicao_carta)
 
     if venceu:
-        desenhar_card_vitoria(tela, tentativas)
+        desenhar_card_vitoria(tela, tentativas, tempo)
 
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)
 
-    # exibe o tempo decorrido no canto superior esquerdo
+    """exibe o tempo decorrido no canto superior esquerdo"""
     fonte_tempo = pygame.font.SysFont("Arial", 32)
     texto_tempo = fonte_tempo.render(f"Tempo: {tempo}s", True, TEXTO)
     tela.blit(texto_tempo, (20, 20))
 
-    # carrega e exibe o recorde salvo logo abaixo do tempo
+    """carrega e exibe o recorde logo abaixo do tempo"""
     recorde = dados.carregar_recorde("data/recorde.txt")
     if recorde > 0:
         texto_recorde = fonte_tempo.render(f"Recorde: {recorde}s", True, TEXTO)
         tela.blit(texto_recorde, (20, 60))
 
     pygame.display.update()
-
-
-def condicao_vitoria():
-    """Verifica se todas as cartas estão com os pares encontrados"""
-    if len(dados.cartas) == 0:
-        return False
-    for carta in dados.cartas:
-        if not carta["descoberta"]:
-            return False
-    return True
