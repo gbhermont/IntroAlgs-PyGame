@@ -87,24 +87,12 @@ def passar_fase(venceu, fase_atual):
     return fase_atual
     #fase = passar_fase(venceu) -> implementar isso no fluxo do jogo dps
 
-def detectar_clique_reiniciar(pos_mouse, tentativas):
-    """Detecta se o clique do mouse foi no botão de reiniciar usando a posição atualizada"""
+def detectar_clique_reiniciar(pos_mouse, nivel):
+    """Detecta se o clique foi no botão reiniciar. Se sim, reinicia o nivel atual e retorna True."""
     retangulo_botao = pygame.Rect(600, 30, 200, 45)
     if retangulo_botao.collidepoint(pos_mouse):
         dados.cartas.clear()
         dados.cartas_selecionadas.clear()
-        dados.inicializar_tabuleiro()
-        novo_tempo_inicio = pygame.time.get_ticks()
-        return 0, False, novo_tempo_inicio
-    return tentativas, None, None
-
-def processar_clique(pos_mouse, tentativas, venceu, jogo_finalizado, tempo_inicio, detectar_clique):
-    novas_tentativas, mudou_estado, novo_tempo = detectar_clique_reiniciar(pos_mouse, tentativas)
-    
-    if mudou_estado is False:
-        return novas_tentativas, False, False, novo_tempo
-    
-    if not venceu:
-        detectar_clique(pos_mouse)
-    
-    return tentativas, venceu, jogo_finalizado, tempo_inicio
+        dados.inicializar_tabuleiro(nivel)
+        return True
+    return False

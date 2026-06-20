@@ -84,39 +84,61 @@ def carregar_recursos_imagens():
     except pygame.error as e:
         print(f"Erro ao carregar imagens: {e}")
         
-def inicializar_tabuleiro():
-    """Gera as cartas para um grid de 4 colunas e 3 linhas centralizado com tamanho 130x130"""
+def inicializar_tabuleiro(nivel=1):
+    """
+    Gera as cartas do tabuleiro de acordo com o nivel escolhido.
+    Nivel 1 (facil)  : 4x3 = 12 cartas, cartas de 180x180
+    Nivel 2 (medio)  : 4x4 = 16 cartas, cartas de 140x140
+    Nivel 3 (dificil): 5x4 = 20 cartas, cartas de 120x120
+    """
     global cartas, cartas_selecionadas
-    
+
+    cartas = []
+    cartas_selecionadas = []
+
     carregar_recursos_imagens()
-    
-    # 6 pares de IDs (total de 12 cartas)
-    valores = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
-    random.shuffle(valores)  
-    
+
+    # define as configuracoes do grid baseado no nivel
+    if nivel == 1:
+        colunas, linhas, tamanho, margem_x, margem_y = 4, 3, 180, 320, 160
+        espacamento = 12
+    elif nivel == 2:
+        colunas, linhas, tamanho, margem_x, margem_y = 4, 4, 140, 380, 100
+        espacamento = 60
+    else:
+        colunas, linhas, tamanho, margem_x, margem_y = 5, 4, 120, 270, 100
+        espacamento = 70
+
+    total_cartas = colunas * linhas
+    total_pares  = total_cartas // 2
+
+    # cria os pares de ids — repete cada id duas vezes
+    ids = []
+    for i in range(total_pares):
+        id_carta = (i % 6) + 1  # reaproveita as 6 imagens ciclicamente
+        ids.append(id_carta)
+        ids.append(id_carta)
+    random.shuffle(ids)
+
     coluna = 0
-    linha = 0
-    
-    margem_x = 320
-    margem_y = 120
-    espacamento = 12
-    
-    for valor in valores:
-        x = margem_x + coluna * (180 + espacamento)
-        y = margem_y + linha * (180 + espacamento)
+    linha  = 0
+
+    for valor in ids:
+        x = margem_x + coluna * (tamanho + espacamento)
+        y = margem_y + linha  * (tamanho + espacamento)
 
         carta = {
-            'id': valor,
-            'x': x,
-            'y': y,
-            'largura': 180, 
-            'altura': 180, 
-            'virada': False,    
-            'descoberta': False 
+            'id'        : valor,
+            'x'         : x,
+            'y'         : y,
+            'largura'   : tamanho,
+            'altura'    : tamanho,
+            'virada'    : False,
+            'descoberta': False
         }
         cartas.append(carta)
-        
+
         coluna += 1
-        if coluna == 4: # QUEBRA A LINHA A CADA 4 COLUNAS
+        if coluna == colunas:
             coluna = 0
             linha += 1
