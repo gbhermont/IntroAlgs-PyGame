@@ -60,12 +60,12 @@ def imagem_com_bordas_arredondadas(imagem, raio):
     
     return superficie_alvo
 
-def carregar_recursos_imagens():
+def carregar_recursos_imagens(nivel):
     """Carrega as imagens da pasta assets e arredonda suas bordas"""
     global imagens_frente, imagens_verso
     
     tamanho_carta = (180, 180)
-    raio_borda = 10 
+    raio_borda = 10
     
     try:
         # 1. Carrega, redimensiona e arredonda o VERSO
@@ -74,48 +74,60 @@ def carregar_recursos_imagens():
         imagens_verso = imagem_com_bordas_arredondadas(img_verso_redimensionada, raio_borda)
         
         # 2. Carrega, redimensiona e arredonda as FRENTES
-        for i in range(1, 7):
-            img_crua = pygame.image.load(f"assets/imagens/img{i}.jpg")
-            img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
-            
-            # Guarda no dicionário já com a borda cortada arredondada!
-            imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
+        if nivel == 1:
+            for i in range(1, 7):
+                img_crua = pygame.image.load(f"assets/imagens/divas{i}.jpg")
+                img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
+                
+                # Guarda no dicionário já com a borda cortada arredondada!
+                imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
+        elif nivel == 2:
+            for i in range(1, 10):
+                img_crua = pygame.image.load(f"assets/imagens/casais{i}.jpg")
+                img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
+                imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
+        else:
+            for i in range(1, 12):
+                img_crua = pygame.image.load(f"assets/imagens/eles{i}.jpg")
+                img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
+                imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
             
     except pygame.error as e:
         print(f"Erro ao carregar imagens: {e}")
-        
+
 def inicializar_tabuleiro(nivel=1):
     """
     Gera as cartas do tabuleiro de acordo com o nivel escolhido.
-    Nivel 1 (facil)  : 4x3 = 12 cartas, cartas de 180x180
-    Nivel 2 (medio)  : 4x4 = 16 cartas, cartas de 140x140
-    Nivel 3 (dificil): 5x4 = 20 cartas, cartas de 120x120
+    Nivel 1 (facil)  : 4 colunas x 3 linhas = 12 cartas, 
+    Nivel 2 (medio)  : 4 colunas x 4 linhas = 16 cartas, 
+    Nivel 3 (dificil): 5 colunas x 4 linhas = 20 cartas,
     """
     global cartas, cartas_selecionadas
 
     cartas = []
     cartas_selecionadas = []
 
-    carregar_recursos_imagens()
+    carregar_recursos_imagens(nivel)
+    
+    tamanho = 180    
+    espacamento = 12
 
-    # define as configuracoes do grid baseado no nivel
     if nivel == 1:
-        colunas, linhas, tamanho, margem_x, margem_y = 4, 3, 180, 320, 160
-        espacamento = 12
+        colunas, linhas = 4, 3
+        margem_x, margem_y = 320, 140
     elif nivel == 2:
-        colunas, linhas, tamanho, margem_x, margem_y = 4, 4, 140, 380, 100
-        espacamento = 60
+        colunas, linhas = 4, 4
+        margem_x, margem_y = 320, 140
     else:
-        colunas, linhas, tamanho, margem_x, margem_y = 5, 4, 120, 270, 100
-        espacamento = 70
+        colunas, linhas = 5, 4
+        margem_x, margem_y = 260, 90
 
     total_cartas = colunas * linhas
     total_pares  = total_cartas // 2
 
-    # cria os pares de ids — repete cada id duas vezes
     ids = []
     for i in range(total_pares):
-        id_carta = (i % 6) + 1  # reaproveita as 6 imagens ciclicamente
+        id_carta = i + 1  
         ids.append(id_carta)
         ids.append(id_carta)
     random.shuffle(ids)

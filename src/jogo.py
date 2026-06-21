@@ -190,6 +190,7 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel=1):
 
     for carta in dados.cartas:
         posicao_carta = (carta["x"], carta["y"])
+        
         if carta["virada"] or carta["descoberta"]:
             imagem_frente = dados.imagens_frente[carta["id"]]
             tela.blit(imagem_frente, posicao_carta)
@@ -203,13 +204,13 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel=1):
     desenhar_botao(tela)
 
     """exibe o nivel atual, o tempo e o recorde no canto superior esquerdo"""
-    fonte_hud = pygame.font.SysFont("Arial", 32)
+    fonte_hud = pygame.font.SysFont("Arial", 28)
 
-    tela.blit(fonte_hud.render(f"Nivel: {nivel}", True, TEXTO),  (20, 20))
-    tela.blit(fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO), (20, 60))
+    tela.blit(fonte_hud.render(f"Nivel: {nivel}", True, TEXTO),  (20, 30))
+    tela.blit(fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO), (160, 30))
 
     recorde = dados.carregar_recorde("data/recorde.txt")
     if recorde > 0:
-        tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (20, 100))
+        tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (320, 30))
 
     pygame.display.update()

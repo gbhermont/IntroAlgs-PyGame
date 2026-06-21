@@ -34,7 +34,7 @@ def desenhar_botao(tela):
     fonte = pygame.font.SysFont("Arial", 32, True, False)
     
     # Centralizado de forma perfeita em relação ao novo grid de cartas (X=350, Y=645)
-    retangulo_botao = pygame.Rect(600, 30, 200, 45) 
+    retangulo_botao = pygame.Rect(600, 30, 200, 38) 
     pygame.draw.rect(tela, (config.BOTAO), retangulo_botao, border_radius=8)
     
     texto_botao = fonte.render("Reiniciar", True, (255, 255, 255))
@@ -89,7 +89,7 @@ def passar_fase(venceu, fase_atual):
 
 def detectar_clique_reiniciar(pos_mouse, nivel):
     """Detecta se o clique foi no botão reiniciar. Se sim, reinicia o nivel atual e retorna True."""
-    retangulo_botao = pygame.Rect(600, 30, 200, 45)
+    retangulo_botao = pygame.Rect(600, 30, 200, 38)
     if retangulo_botao.collidepoint(pos_mouse):
         dados.cartas.clear()
         dados.cartas_selecionadas.clear()
