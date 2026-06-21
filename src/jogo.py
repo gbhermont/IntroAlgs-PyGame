@@ -1,5 +1,6 @@
 import pygame
 import src.dados as dados
+from src.funcoes import menu_inicio
 
 from src.config import (
     LARGURA_TELA,
@@ -22,6 +23,7 @@ from src.funcoes import (
     condicao_vitoria,
     passar_fase,
     detectar_clique_reiniciar,
+    menu_inicio
 )
 
 
@@ -37,6 +39,11 @@ def executar_jogo():
     pygame.display.set_caption(TITULO_JOGO)
 
     relogio = pygame.time.Clock()
+
+    nome_jogador = menu_inicio(tela)
+    
+    if nome_jogador == "":
+        nome_jogador = "Jogador"  #macla
 
     """começa sempre no nivel 1 (facil)"""
     nivel = 1
@@ -77,7 +84,7 @@ def executar_jogo():
 
         """verifica pares e acumula tentativas enquanto o nivel está ativo"""
         if not venceu:
-            tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel)
+            tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
 
             if condicao_vitoria():
                 venceu               = True
@@ -105,7 +112,7 @@ def executar_jogo():
             rodando = False
 
         if rodando:
-            desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel)
+            desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
 
     pygame.quit()
 
@@ -126,11 +133,11 @@ def detectar_clique(pos_mouse):
                     dados.cartas_selecionadas.append(i)
 
 
-def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel):
+def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador):
     """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
     if len(dados.cartas_selecionadas) == 2:
 
-        desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel)
+        desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
         pygame.time.wait(800)
 
         """Pega a posição das duas cartas que foram clicadas"""
@@ -154,7 +161,7 @@ def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel):
     return tentativas
 
 
-def desenhar_card_vitoria(tela, tentativas, tempo=0, nivel=1):
+def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
     """Desenha um pop-up gráfico (card) centralizado com os resultados do nivel."""
     largura_card, altura_card = 500, 280
     x_card = (LARGURA_TELA - largura_card) // 2
@@ -176,14 +183,16 @@ def desenhar_card_vitoria(tela, tentativas, tempo=0, nivel=1):
     texto_subtitulo = fonte_dados.render("Você encontrou todos os pares!", True, TEXTO)
     texto_resultado = fonte_dados.render(f"Tentativas: {tentativas}", True, TEXTO)
     texto_tempo     = fonte_dados.render(f"Tempo: {tempo}s", True, TEXTO)
+    texto_nome = fonte_dados.render(f"Jogador: {nome_jogador}", True, TEXTO)
 
     tela.blit(texto_titulo,    texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50)))
     tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 110)))
     tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 160)))
     tela.blit(texto_tempo,     texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 210)))
+    tela.blit(texto_nome, (rect_card.centerx - 100, rect_card.top + 80))
 
 
-def desenhar_elementos(tela, tentativas, venceu, tempo, nivel=1):
+def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     """Desenha o fundo, as cartas, o HUD e o card de vitória se necessário."""
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
@@ -197,7 +206,7 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel=1):
             tela.blit(dados.imagens_verso, posicao_carta)
 
     if venceu:
-        desenhar_card_vitoria(tela, tentativas, tempo, nivel)
+        desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo, nivel)
 
     desenhar_tentativas(tela, tentativas, fonte)
     desenhar_botao(tela)
@@ -211,5 +220,12 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel=1):
     recorde = dados.carregar_recorde("data/recorde.txt")
     if recorde > 0:
         tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (20, 100))
+    
+    texto_nome = fonte_hud.render(
+    f"Jogador: {nome_jogador}",
+    True,
+    TEXTO
+)
 
+    tela.blit(texto_nome, (20, 140))
     pygame.display.update()
