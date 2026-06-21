@@ -1,6 +1,6 @@
-# Configurações centrais do jogo (tela, cores, título, tempo e nível).
+# Configurações centrais do jogo (tela, cores, fps, título, tempo e nível).
 LARGURA_TELA = 1400
-ALTURA_TELA = 768
+ALTURA_TELA = 800
 FPS = 60
 TEMPO_TELA_VITORIA = 3000
 NIVEL_MAXIMO = 3
