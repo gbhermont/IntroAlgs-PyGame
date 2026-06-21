@@ -30,18 +30,9 @@ Tipo de jogo: Jogo de Memória
 
 No jogo de memória, aparece na tela um tabuleiro com cartas viradas para baixo, além de informações como número de tentativas gastas e opção de reiniciar. O jogador controla o mouse e escolhe as cartas clicando nelas para revelá-las. O objetivo é encontrar todos os pares iguais, memorizando a posição de cada carta. Durante a partida, o desafio é lembrar onde cada imagem está e fazer as combinações corretas. O jogo termina quando todos os pares forem encontrados. 
 
-Exemplo:
-
-> Exemplo: O jogo do Mico, onde você deve achar o par de cada animal correspondente.
-> 
 ## Objetivo do jogador
 
 Objetivo do jogador: Encontrar todos os pares de cartas no menor número de tentativas possível. 
-
-Exemplo:
-
->Encontrar todos os pares de cartas no menor número de tentativas possível.
-
 
 ## Regras do jogo
 

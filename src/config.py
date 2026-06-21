@@ -1,7 +1,9 @@
-# Configurações centrais do jogo (tela, cores e caminhos de arquivos).
+# Configurações centrais do jogo (tela, cores, título, tempo e nível).
 LARGURA_TELA = 1400
 ALTURA_TELA = 768
 FPS = 60
+TEMPO_TELA_VITORIA = 3000
+NIVEL_MAXIMO = 3
 
 TITULO_JOGO = "Match Up - Pygame"
 
