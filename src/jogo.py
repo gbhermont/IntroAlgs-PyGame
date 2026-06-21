@@ -185,11 +185,21 @@ def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
     texto_tempo     = fonte_dados.render(f"Tempo: {tempo}s", True, TEXTO)
     texto_nome = fonte_dados.render(f"Jogador: {nome_jogador}", True, TEXTO)
 
-    tela.blit(texto_titulo,    texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50)))
-    tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 110)))
-    tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 160)))
-    tela.blit(texto_tempo,     texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 210)))
-    tela.blit(texto_nome, (rect_card.centerx - 100, rect_card.top + 80))
+    # --- Posições ---
+    # Centraliza o Título bem no topo do card
+    tela.blit(texto_titulo, texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 45)))
+    
+    # Coloca o Nome do Jogador logo abaixo do título (Y = top + 95)
+    tela.blit(texto_nome, texto_nome.get_rect(center=(rect_card.centerx, rect_card.top + 95)))
+    
+    # Desce o Subtítulo um pouco mais para baixo (Y = top + 145)
+    tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 145)))
+    
+    # Mostra as Tentativas (Y = top + 195)
+    tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 195)))
+    
+    # Mostra o Tempo no final do card (Y = top + 245)
+    tela.blit(texto_tempo, texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 245)))
 
 
 def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):

@@ -118,7 +118,7 @@ def menu_inicio(tela):
 
     # --- Paleta de Cores do Card ---
     # Cores no formato RGB utilizadas para estilizar a interface do menu
-    COR_CARD = (240, 244, 248)          # Cor de fundo do card (branco azulado)
+    COR_CARD = (240, 244, 248)          # Cor de fundo do card 
     COR_TEXTO_CARD = (40, 50, 60)       # Cor do texto principal dentro do card
     COR_CAIXA_TEXTO = (210, 220, 230)   # Cor de fundo do campo de digitação
     COR_DESTAQUE = (70, 130, 180)       # Cor azul usada no título e na borda externa
