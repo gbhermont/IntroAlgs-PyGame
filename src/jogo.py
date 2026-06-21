@@ -52,9 +52,38 @@ def executar_jogo():
                 if evento.button == 1: 
                     tentativas = detectar_clique_reiniciar(evento.pos, tentativas)
                     detectar_clique(evento.pos)
-        
-        tentativas = atualizar_jogo(tela, tentativas)
-        desenhar_elementos(tela, tentativas)
+
+        """verifica pares e acumula tentativas enquanto o nivel está ativo"""
+        if not venceu:
+            tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
+
+            if condicao_vitoria():
+                venceu               = True
+                jogo_concluido       = (nivel == NIVEL_MAXIMO)
+                tempo_inicio_vitoria = pygame.time.get_ticks()
+                dados.salvar_no_ranking(nome_jogador, tempo_atual)
+                dados.verificar_e_salvar_recorde(tempo_atual)
+
+        """
+        Transição automática de nivel.
+        Depois de TEMPO_TELA_VITORIA milissegundos mostrando o card de vitória,
+        avança pro proximo nivel. Se era o ultimo, encerra o jogo.
+        """
+        tempo_na_tela_vitoria = pygame.time.get_ticks() - tempo_inicio_vitoria
+
+        if venceu and not jogo_concluido and tempo_na_tela_vitoria >= TEMPO_TELA_VITORIA:
+            nivel += 1
+            dados.inicializar_tabuleiro(nivel)
+            tentativas   = 0
+            venceu       = False
+            tempo_atual  = 0
+            tempo_inicio = pygame.time.get_ticks()
+
+        if jogo_concluido and tempo_na_tela_vitoria >= TEMPO_TELA_VITORIA:
+            rodando = False
+
+        if rodando:
+            desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
 
     pygame.quit()
 
