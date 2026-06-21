@@ -8,44 +8,15 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 Match Up
 
-Exemplo:
-
-> Corrida dos Obstáculos
 
 ## 2. Integrantes do grupo
 
-Liste os integrantes do grupo.
-
-<<<<<<< HEAD
-- Nome 1: 
-- Nome 2:
-- Nome 3: 
-- Nome 4: 
-=======
 - Nome 1:Gabriel de Souza Junqueira Hermont
 - Nome 2:Kemily Eduardo da Luz
 - Nome 3:Maria Clara Soalheiro Bessa
 - Nome 4:Armando Schoenstatt Rodrigues e Moreira
->>>>>>> c4918354f5ac20851a19df3e18cc0232605adc45
 
 ## 3. Tipo de jogo
-
-Indique o tipo de jogo que será desenvolvido.
-
-Exemplos:
-
-- jogo de desviar de obstáculos;
-- jogo de coleta de itens;
-- labirinto simples;
-- jogo de perguntas e respostas;
-- jogo de memória;
-- Pong;
-- Snake;
-- Breakout;
-- nave desviando de meteoros;
-- corrida simples com obstáculos;
-- jogo de clique rápido;
-- jogo de sobrevivência simples.
 
 Tipo escolhido pelo grupo:
 
@@ -68,53 +39,23 @@ Descrição:
 
 ## 5. Objetivo do jogador
 
-Explique qual é o objetivo principal do jogador.
-
-Exemplos:
-
-- coletar o maior número possível de itens;
-- sobreviver pelo maior tempo possível;
-- chegar até o final do labirinto;
-- acertar alvos;
-- responder perguntas corretamente;
-- evitar obstáculos;
-- quebrar todos os blocos.
-
 Objetivo:
 
-Encontrar todos os pares de cartas no menor número de tentativas possível.
+Encontrar todos os pares de cartas no menor número de tentativas possível e avançar de nível.
 
 ## 6. Regras principais
-
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador começa com 3 vidas.
-- Cada moeda coletada vale 10 pontos.
-- Cada colisão com obstáculo remove 1 vida.
-- A partida termina quando as vidas chegam a zero.
-- O jogador vence se alcançar 100 pontos.
 
 Regras do grupo:
 
 Regra 1: O jogador pode virar apenas duas cartas por vez.
 Regra 2: Se as duas cartas selecionadas forem idênticas, elas permanecem visíveis e são contabilizadas como um par encontrado.
 Regra 3: Caso as cartas escolhidas sejam diferentes, elas serão exibidas por um breve período e, em seguida, voltarão a ficar viradas para baixo.
-Regra 4: O jogo prossegue até que todos os pares no tabuleiro sejam encontrados.
+Regra 4: O jogo prossegue para a próxima fase até que todos os pares no tabuleiro sejam encontrados.
 Regra 5: O número total de tentativas será registrado e exibido ao longo de toda a partida.
 
 ## 7. Condição de vitória
 
 Explique como o jogador vence ou conclui o jogo.
-
-Exemplos:
-
-- atingir determinada pontuação;
-- chegar ao final da fase;
-- sobreviver até o tempo acabar;
-- responder uma quantidade mínima de perguntas;
-- quebrar todos os blocos.
 
 Condição de vitória:
 
@@ -124,27 +65,17 @@ Condição de vitória:
 
 Explique como o jogador perde ou quando a partida termina.
 
-Exemplos:
-
-- perder todas as vidas;
-- acabar o tempo;
-- colidir com determinado obstáculo;
-- errar muitas perguntas;
-- deixar a bola cair, no caso de Breakout ou Pong.
-
 Condição de derrota ou encerramento:
 
-A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo.
+A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo, ou se o jogador não conseguir encontrar todos os pares no tempo estipulado.
 
 ## 9. Elementos previstos no jogo
 
 Descreva os principais elementos que farão parte do jogo.
 
+Cartas, tempo, tentativas.
+
 ## Jogador ou elemento principal
-
-Exemplo:
-
-> Um personagem controlado pelas setas do teclado.
 
 Descrição:
 
@@ -152,46 +83,26 @@ Descrição:
 
 ## Obstáculos, inimigos ou desafios
 
-Exemplo:
-
-> Obstáculos aparecem em posições aleatórias e devem ser evitados.
-
 Descrição:
 
-> O principal desafio será lembrar a posição das cartas já reveladas e evitar erros nas combinações. Quando duas cartas diferentes forem escolhidas, elas voltarão a ficar escondidas.
+> Os principais desafios serão lembrar a posição das cartas já reveladas e evitar erros nas combinações, conseguir achar todos os pares dentro do limite de tempo e passar de nível onde a dificuldade aumenta a cada fase.
 
 ## Itens, alvos ou objetos de interação
 
-Exemplo:
-
-> Moedas aparecem na tela e aumentam a pontuação quando coletadas.
-
 Descrição:
 
-> Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória e elementos visuais de fundo e interface.
+> Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória, níveis de dificuldade, tentativas, temporizador e ranking por tempo.
 
 ## Pontuação, vidas, tempo ou progresso
 
-Exemplo:
-
-> O jogador começa com 3 vidas e ganha 10 pontos por item coletado.
 
 Descrição:
 
-> O jogo acompanhará o progresso por meio do contador de tentativas e da quantidade de pares encontrados. À medida que os pares forem completados, o jogador avançará até encontrar todas as combinações e finalizar a partida com a mensagem de vitória.
+> O jogo acompanhará o progresso por meio do contador de tentativas, um temporazidor e se o jogador passou de nível. Além de um ranking para definir quem fez o melhor tempo.
 
 ## 10. Controles previstos
 
 Informe os comandos que serão utilizados pelo jogador.
-
-Exemplo:
-
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
-- ESC: sair do jogo
 
 Controles do grupo:
 
@@ -215,13 +126,14 @@ src/: Diretório que abrigará o código-fonte principal do jogo, incluindo a l�
 assets/: Diretório para armazenar todos os recursos visuais e sonoros do jogo, como imagens das cartas, fontes e efeitos sonoros.
 data/: Diretório para arquivos persistentes, como o registro de recordes ou rankings de jogadores.
 tests/: Diretório para os testes unitários do projeto, utilizando a ferramenta pytest.
-docs/: Diretório para a documentação do projeto, incluindo esta proposta inicial e outros documentos relevantes.
+docs/: Diretório para a documentação do projeto, incluindo README.md e proposta.md.
 
 
 
 Organização planejada:
 
-> Escreva aqui.
+main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo. 
+config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e título do jogo.
 
 
 ## 12. Recursos externos previstos
@@ -237,11 +149,11 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
+> Utilização de imagens gratuitas.
 
 Caso não pretenda utilizar recursos externos, escreva:
 
-> Não pretendemos utilizar recursos externos.
+> 
 
 ## 13. Principais dificuldades esperadas
 
@@ -267,24 +179,9 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+> A versão mínima do jogo terá cartas embaralhadas em tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, sistema de ranking por tempo, temporizador e mensagem de vitória.
 
 ## 15. Possíveis melhorias, caso haja tempo
-
-Liste funcionalidades extras que o grupo poderá implementar se conseguir concluir o escopo mínimo.
-
-Exemplos:
-
-- sons;
-- fases;
-- tela inicial;
-- aumento de dificuldade;
-- ranking;
-- animações;
-- novos tipos de obstáculos;
-- diferentes personagens;
-- menu de pausa,
-- jogo contra a máquina, outra pessoa ou sozinho
 
 Melhorias possíveis:
 

@@ -1,4 +1,15 @@
 import random
+import pygame
+
+# Caminhos dos arquivos de recorde e ranking
+Caminho_Recorde = "data/recorde.txt"
+Caminho_Ranking = "data/ranking.txt"
+
+cartas = []
+cartas_selecionadas = []
+
+imagens_frente = {}
+imagens_verso = None
 
 def salvar_recorde(caminho_arquivo, pontuacao):
     """Salva a pontuação recorde em arquivo texto."""
@@ -126,31 +137,54 @@ def inicializar_tabuleiro(nivel=1):
     Nivel 3 (dificil): 5 colunas x 4 linhas = 20 cartas,
     """
     global cartas, cartas_selecionadas
-    valores = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
-    random.shuffle(valores)  
-    
-    coluna = 0
-    linha = 0
-    
-    for valor in valores:
-        """Calcula a posição X e Y de cada carta na tela"""
-        x = 100 + coluna * 120
-        y = 160 + linha * 120
 
-        """Cria o dicionário com os dados individuais da carta"""
+    cartas = []
+    cartas_selecionadas = []
+
+    carregar_recursos_imagens(nivel)
+    
+    tamanho = 180    
+    espacamento = 12
+
+    if nivel == 1:
+        colunas, linhas = 4, 3
+        margem_x, margem_y = 320, 140
+    elif nivel == 2:
+        colunas, linhas = 4, 4
+        margem_x, margem_y = 320, 140
+    else:
+        colunas, linhas = 5, 4
+        margem_x, margem_y = 260, 90
+
+    total_cartas = colunas * linhas
+    total_pares  = total_cartas // 2
+
+    ids = []
+    for i in range(total_pares):
+        id_carta = i + 1  
+        ids.append(id_carta)
+        ids.append(id_carta)
+    random.shuffle(ids)
+
+    coluna = 0
+    linha  = 0
+
+    for valor in ids:
+        x = margem_x + coluna * (tamanho + espacamento)
+        y = margem_y + linha  * (tamanho + espacamento)
+
         carta = {
-            'id': valor,
-            'x': x,
-            'y': y,
-            'largura': 100,
-            'altura': 100,
-            'virada': False,    
-            'descoberta': False   
+            'id'        : valor,
+            'x'         : x,
+            'y'         : y,
+            'largura'   : tamanho,
+            'altura'    : tamanho,
+            'virada'    : False,
+            'descoberta': False
         }
         cartas.append(carta)
-        
-        """Organiza o desenho em 4 colunas por linha"""
-        coluna = coluna + 1
-        if coluna == 6:
+
+        coluna += 1
+        if coluna == colunas:
             coluna = 0
-            linha = linha + 1
+            linha += 1
