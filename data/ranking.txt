@@ -89,3 +89,9 @@ maria,49
 Macla,51
 >>>>>>> f5e77c6a14f324748de0d1d04b54fe48b662e759
 maria,31
+ana,33
+ana,107
+ana,69
+a],24
+a],26
+a],49

@@ -104,14 +104,24 @@ def executar_jogo():
             tempo_atual  = 0
             tempo_inicio = pygame.time.get_ticks()
 
-        # Se o jogo foi concluído (venceu o nível 3) e o tempo do card de vitória acabou
+        """Se o jogo foi concluído e o tempo do card de vitória acabou"""
         if jogo_concluido and tempo_na_tela_vitoria >= TEMPO_TELA_VITORIA:
-            # Abre a tela de ranking automaticamente!
-            # O jogo vai ficar preso na tela de ranking até o jogador clicar em "Voltar" ou apertar ESC/ENTER
+            """Abre a tela de ranking e segura o jogador lá até ele clicar em Voltar"""
             tela_ranking(tela)
             
-            # Assim que o jogador sair da tela de ranking, o loop principal é encerrado e o jogo fecha
-            rodando = False
+            """Chama novamente o menu inicial e reseta o estado para uma nova partida"""
+            nome_jogador = menu_inicio(tela)
+            if nome_jogador == "":
+                nome_jogador = "Jogador"
+                
+            nivel = 1
+            dados.inicializar_tabuleiro(nivel)
+            tentativas = 0
+            venceu = False
+            jogo_concluido = False
+            tempo_inicio_vitoria = 0
+            tempo_atual = 0
+            tempo_inicio = pygame.time.get_ticks()
 
         if rodando:
             desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
