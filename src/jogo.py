@@ -241,11 +241,19 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     tela.blit(texto_tempo, (420, Y_LINHA))
 
     recorde = dados.carregar_recorde("data/recorde.txt")
+
     if recorde > 0:
         texto_recorde = fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO)
         tela.blit(texto_recorde, (600, Y_LINHA))
 
     desenhar_botao(tela)
     desenhar_tentativas(tela, tentativas)
+    
+    texto_nome = fonte_hud.render(
+    f"Jogador: {nome_jogador}",
+    True,
+    TEXTO
+)
+    tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (320, 30))
 
     pygame.display.update()

@@ -6,9 +6,9 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-Nome 1: Gabriel de Souza Junqueira Hermont -
-Nome 2: Kemily Eduardo da Luz - 
-Nome 3: Maria Clara Soalheiro Bessa - 
+Nome 1: Gabriel de Souza Junqueira Hermont 
+Nome 2: Kemily Eduardo da Luz 
+Nome 3: Maria Clara Soalheiro Bessa 
 Nome 4: Armando Schoenstatt Rodrigues e Moreira 
 
 Tipo de jogo: Jogo de Memória 
@@ -16,19 +16,20 @@ Tipo de jogo: Jogo de Memória
 ## Estrutura do projeto
 
 - `main.py`: ponto de entrada da aplicação.
-- `config.py`: guardará as configurações principais, como tamanho da tela, cores e FPS.
-- `jogo.py`: terá o loop principal e o controle das telas.
-- `cartas.py`: cuidará da criação, embaralhamento e verificação dos pares de cartas.
-- `funcoes.py`: terá funções auxiliares, como desenhar textos e botões. 
+- `config.py`: guardará as configurações principais, como tamanho da tela, cores e FPS, título do jogo.
+- `jogo.py`: Contém o loop principal da partida e gerencia as regras ativas, mecânica de cliques, verificação de igualdade das cartas e avanço automático de fases.
+- `funcoes.py`: Responsável pelas telas de interface gráfica, como o menu de início em formato de card (para captura do nome do jogador), a tela gráfica do ranking geral e funções utilitárias de desenho de botões e textos.
 - `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
-- `assets/`: imagens, fontes e sons.
+- `dados.py`: É responsável por carregar e salvar recordes locais, salvar nomes e tempos no ranking, inicializar a matriz do tabuleiro e carregar/redimensionar os recursos visuais das cartas.
+- `assets/`: imagens.
 - `data/`: arquivos persistentes (recorde/ranking).
 - `tests/`: testes unitários com `pytest`.
 - `docs/`: documentação do projeto, incluindo proposta inicial.
 
 ## Descrição do jogo
 
-No jogo de memória, aparece na tela um tabuleiro com cartas viradas para baixo, além de informações como número de tentativas gastas e opção de reiniciar. O jogador controla o mouse e escolhe as cartas clicando nelas para revelá-las. O objetivo é encontrar todos os pares iguais, memorizando a posição de cada carta. Durante a partida, o desafio é lembrar onde cada imagem está e fazer as combinações corretas. O jogo termina quando todos os pares forem encontrados. 
+No jogo Match Up, os jogadores enfrentam um tabuleiro com diversas cartas viradas para baixo, a temática do jogo é a série Off-Campus. A interface exibe o nível atual, o tempo decorrido, o recorde local e o nome do jogador, além de um contador de tentativas e um botão gráfico para reiniciar a partida. O jogador interage exclusivamente por meio do mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares correspondentes, exigindo memorização rápida das imagens. O desafio aumenta progressivamente a cada nível, alterando o tamanho do tabuleiro e a quantidade de cartas.
+
 
 ## Objetivo do jogador
 
@@ -36,58 +37,14 @@ Objetivo do jogador: Encontrar todos os pares de cartas no menor número de tent
 
 ## Regras do jogo
 
-Regra 1: O jogador pode virar apenas duas cartas por vez. 
-Regra 2: Se as duas cartas escolhidas forem iguais, elas permanecem viradas e contam como um par encontrado.
-Regra 3: Se as cartas forem diferentes, elas ficam visíveis por alguns segundos e depois voltam a ficar viradas para baixo. 
-Regra 4: O jogador deve continuar jogando até encontrar todos os pares do tabuleiro.
-Regra 5: O número de tentativas será contado durante toda a partida 
-Condição de vitória: O jogador vence quando consegue encontrar todos os pares de cartas do tabuleiro. 
-Condição de derrota ou encerramento: A partida termina quando o jogador encontra todos os pares de cartas ou fecha a janela do jogo. 
-
-Exemplo:
-
-- O jogador usa o click do mouse para virar as cartas.
-- Ter 2 cartas iguais mostra que ele acertou o par
-- Caso o contrário ele tem que tentar readivinhar o par de novo
-
+Regra 1: O jogador pode virar apenas duas cartas por vez.
+Regra 2: Se as duas cartas selecionadas forem idênticas, elas permanecem visíveis e são contabilizadas como um par encontrado.
+Regra 3: Caso as cartas escolhidas sejam diferentes, elas serão exibidas por um breve período e, em seguida, voltarão a ficar viradas para baixo.
+Regra 4: O jogo prossegue para a próxima fase até que todos os pares no tabuleiro sejam encontrados.
+Regra 5: O número total de tentativas e o tempo são registrados e exibidos ao longo de toda a partida. 
 
 ## Controles
 
-O jogador escolherá as cartas com o click do seu mouse
-
-Exemplo:
-
-- Click do mouse
-- ESC: sair do jogo
-- Botão fechar janela (X): encerrar o jogo
-- Botão de reiniciar (mouse): iniciar uma nova partida. 
-
-## Como executar o projeto
-
-### 1. Clonar o repositório
-
-```bash
-git clone LINK_DO_REPOSITORIO
-cd NOME_DA_PASTA
-pip install -r requirements.txt
-python main.py
-```
-
-## Como executar os testes
-
-```bash
-python -m pytest
-```
-
-## Checklist mínimo para entrega
-
-- Preencher este README com nome final, descrição real, regras e controles do jogo.
-- Atualizar `docs/proposta.MD` com a proposta do grupo.
-- Garantir que o jogo executa com `python main.py`.
-- Garantir que os testes passam com `pytest`.
-
-## Observações para os alunos
-
-- Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
-- Comentem partes importantes da lógica, principalmente regras do jogo.
-- Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.
+- Clique do mouse: Utilizado para selecionar e virar as cartas no tabuleiro.
+- ESC / ENTER: Atalhos de teclado para sair do jogo ou confirmar ações rápidas de transição nas telas de interface.
+- Botão fechar janela (X): Encerra o jogo.

@@ -8,7 +8,6 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 Match Up
 
-
 ## 2. Integrantes do grupo
 
 - Nome 1:Gabriel de Souza Junqueira Hermont
@@ -24,136 +23,80 @@ Tipo escolhido pelo grupo:
 
 ## 4. Descrição geral do jogo
 
-Explique, em poucas linhas, como o jogo funcionará.
-
-Procure responder:
-
-- O que aparece na tela?
-- O que o jogador controla?
-- O que o jogador precisa fazer?
-- Quais desafios aparecem durante a partida?
-
-Descrição:
-
-> No jogo Match Up, os jogadores são apresentados a um tabuleiro com diversas cartas viradas para baixo. A interface do jogo também exibe informações relevantes, como o número de tentativas realizadas e a opção de reiniciar a partida. O jogador interage com o jogo utilizando o mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares de cartas idênticas, exigindo que o jogador memorize a posição de cada imagem. O desafio reside em recordar a localização das imagens para formar as combinações corretas. A partida é concluída quando todos os pares são descobertos. Um exemplo clássico desse tipo de jogo é o "Jogo do Mico".
+> No jogo Match Up, os jogadores enfrentam um tabuleiro com diversas cartas viradas para baixo, a temática do jogo é a série Off-Campus. A interface exibe o nível atual, o tempo decorrido, o recorde local e o nome do jogador, além de um contador de tentativas e um botão gráfico para reiniciar a partida. O jogador interage exclusivamente por meio do mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares correspondentes, exigindo memorização rápida das imagens. O desafio aumenta progressivamente a cada nível, alterando o tamanho do tabuleiro e a quantidade de cartas.
 
 ## 5. Objetivo do jogador
-
-Objetivo:
 
 Encontrar todos os pares de cartas no menor número de tentativas possível e avançar de nível.
 
 ## 6. Regras principais
 
-Regras do grupo:
-
 Regra 1: O jogador pode virar apenas duas cartas por vez.
 Regra 2: Se as duas cartas selecionadas forem idênticas, elas permanecem visíveis e são contabilizadas como um par encontrado.
 Regra 3: Caso as cartas escolhidas sejam diferentes, elas serão exibidas por um breve período e, em seguida, voltarão a ficar viradas para baixo.
 Regra 4: O jogo prossegue para a próxima fase até que todos os pares no tabuleiro sejam encontrados.
-Regra 5: O número total de tentativas será registrado e exibido ao longo de toda a partida.
+Regra 5: O número total de tentativas e o tempo são registrados e exibidos ao longo de toda a partida.
 
 ## 7. Condição de vitória
 
-Explique como o jogador vence ou conclui o jogo.
-
-Condição de vitória:
-
-> O jogador vence a partida quando consegue encontrar e combinar todos os pares de cartas presentes no tabuleiro.
+> O jogador vence o jogo ao concluir com sucesso o terceiro e último nível do tabuleiro, encontrando todos os pares de cartas e registrando seu tempo final.
 
 ## 8. Condição de derrota ou encerramento
 
-Explique como o jogador perde ou quando a partida termina.
-
-Condição de derrota ou encerramento:
-
-A partida é encerrada em duas situações: quando o jogador encontra todos os pares de cartas do tabuleiro, resultando em vitória, ou quando o jogador decide fechar a janela do jogo, ou se o jogador não conseguir encontrar todos os pares no tempo estipulado.
+A partida é encerrada quando o jogador conclui o nível máximo abrindo automaticamente a tela de classificação com o ranking atualizado, ou quando o usuário decide fechar a janela do jogo através do botão (X) ou da tecla ESC.
 
 ## 9. Elementos previstos no jogo
 
-Descreva os principais elementos que farão parte do jogo.
-
-Cartas, tempo, tentativas.
+As Cartas: O elemento central do tabuleiro. Elas mudam de quantidade e de imagem a cada nível e possuem um verso padrão.
+O Temporizador (Tempo): Um cronômetro ativo que conta os segundos na tela para pressionar o jogador a terminar o nível o mais rápido possível.
+O Contador de Tentativas: Registra quantas vezes o jogador tentou virar um par de cartas, ajudando a medir a eficiência da memória dele.
+O Recorde: Mostra no topo da tela o melhor tempo já registrado, servindo de alvo para o jogador superar.
+O Botão Reiniciar: Um botão interativo na tela que permite ao jogador resetar a fase atual a qualquer momento se ele se perder.
+A Caixa de Entrada de Texto (Input): O campo na tela inicial onde o jogador digita o seu nome antes de a partida começar.
+O Ranking: A tabela final que lê o arquivo de texto e lista de forma ordenada os melhores tempos junto com os nomes dos jogadores.
 
 ## Jogador ou elemento principal
-
-Descrição:
 
 > O jogador irá interagir com o jogo por meio do mouse, clicando nas cartas do tabuleiro para revelá-las e tentar encontrar os pares corretos. Sua principal função será memorizar as posições das cartas e realizar as combinações certas até completar o jogo.
 
 ## Obstáculos, inimigos ou desafios
 
-Descrição:
-
 > Os principais desafios serão lembrar a posição das cartas já reveladas e evitar erros nas combinações, conseguir achar todos os pares dentro do limite de tempo e passar de nível onde a dificuldade aumenta a cada fase.
 
 ## Itens, alvos ou objetos de interação
-
-Descrição:
 
 > Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória, níveis de dificuldade, tentativas, temporizador e ranking por tempo.
 
 ## Pontuação, vidas, tempo ou progresso
 
-
-Descrição:
-
 > O jogo acompanhará o progresso por meio do contador de tentativas, um temporazidor e se o jogador passou de nível. Além de um ranking para definir quem fez o melhor tempo.
 
 ## 10. Controles previstos
 
-Informe os comandos que serão utilizados pelo jogador.
-
-Controles do grupo:
-
 - Clique do mouse: Utilizado para selecionar e virar as cartas no tabuleiro.
-- ESC: Tecla para sair do jogo.
+- ESC / ENTER: Atalhos de teclado para sair do jogo ou confirmar ações rápidas de transição nas telas de interface.
 - Botão fechar janela (X): Encerra o jogo.
 
 
 ## 11. Organização inicial do código
 
-Explique como o grupo pretende organizar o código.
-
-Exemplo:
-
-main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo.
-config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e outras constantes.
-jogo.py: Contém o loop principal do jogo e gerencia a transição e o estado das diferentes telas (ex: menu, jogo, fim de jogo).
-cartas.py: Módulo responsável pela lógica das cartas, incluindo sua criação, embaralhamento, virar/desvirar e verificação de pares.
-funcoes.py: Módulo para funções auxiliares e utilitárias, como renderização de textos, criação de botões e outros elementos gráficos comuns.
-src/: Diretório que abrigará o código-fonte principal do jogo, incluindo a lógica do loop, regras, sprites e dados específicos.
-assets/: Diretório para armazenar todos os recursos visuais e sonoros do jogo, como imagens das cartas, fontes e efeitos sonoros.
+main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo. 
+config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e título do jogo.
+jogo.py: Contém o loop principal e gerencia as regras do jogo, como os cliques, a detecção de pares, o fluxo de avanço automático de fases, informações na tela e telas de vitória.
+funcoes.py: Módulo responsável pelas telas de interface gráfica, como o menu de início em formato de card (para captura do nome do jogador), a tela gráfica do ranking geral e funções utilitárias de desenho de botões e textos.
+dados.py: É responsável por carregar e salvar recordes locais, salvar nomes e tempos no ranking, inicializar a matriz do tabuleiro e carregar/redimensionar os recursos visuais das cartas.
 data/: Diretório para arquivos persistentes, como o registro de recordes ou rankings de jogadores.
+assets/: Diretório contendo os recursos de imagens organizados por categorias de fases.
 tests/: Diretório para os testes unitários do projeto, utilizando a ferramenta pytest.
 docs/: Diretório para a documentação do projeto, incluindo README.md e proposta.md.
 
-
-
-Organização planejada:
-
-main.py: Ponto de entrada principal da aplicação, responsável por iniciar o jogo. 
-config.py: Arquivo dedicado a armazenar as configurações globais do jogo, como dimensões da tela, paleta de cores, taxa de quadros por segundo (FPS) e título do jogo.
-
-
 ## 12. Recursos externos previstos
 
-Informe se o grupo pretende utilizar imagens, sons, fontes, tutoriais ou códigos externos.
+Imagens temáticas inspiradas nos personagens e casais da série de livros Off-Campus, coletadas na plataforma Pinterest
 
-Exemplo:
+Fontes nativas do sistema (Arial) gerenciadas pelo Pygame;
 
-- imagens obtidas de banco gratuito;
-- sons gratuitos;
-- tutorial usado apenas como referência;
-- fonte personalizada.
-
-Recursos previstos:
-
-> Utilização de imagens gratuitas.
-
-Caso não pretenda utilizar recursos externos, escreva:
-
-> 
+Arquivos .txt locais para persistência do ranking.
 
 ## 13. Principais dificuldades esperadas
 
@@ -169,13 +112,7 @@ Dificuldades previstas:
 
 ## 14. Escopo mínimo para a entrega final
 
-Descreva qual será a versão mínima aceitável do jogo.
-
-Esta seção é importante para evitar que o grupo escolha uma ideia grande demais.
-
-Escopo mínimo:
-
-> A versão mínima do jogo terá cartas embaralhadas em tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, temporizador e mensagem de vitória.
+> A versão mínima do jogo terá cartas embaralhadas em um tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, temporizador e mensagem de vitória.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
