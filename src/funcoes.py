@@ -224,7 +224,6 @@ def tela_ranking(tela):
     """
     fonte_titulo = pygame.font.SysFont("Arial", 36, bold=True)
     fonte_linha = pygame.font.SysFont("Arial", 24)
-    fonte_vazio = pygame.font.SysFont("Arial", 22)
 
     COR_CARD = (240, 244, 248)
     COR_TEXTO_CARD = (40, 50, 60)

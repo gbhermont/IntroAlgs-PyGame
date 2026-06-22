@@ -39,10 +39,8 @@ def verificar_e_salvar_recorde(tempo_segundos):
     return novo_recorde
 
 def salvar_no_ranking(nome_jogador, tempo_segundos):
-    """
-    Adiciona o nome do jogador e o tempo da partida no ranking
-    Salva uma linha 'nome,tempo' no arquivo de ranking.
-    """
+    """Salva uma linha 'nome,tempo' no arquivo de ranking.
+    A função recebe o nome do jogador e o tempo recorde que ele fez em segundos como parâmetro e salva no arquivo "ranking.txt"""
     nome_tratado = nome_jogador.strip().replace(",", "") or "Jogador"
     with open(Caminho_Ranking, "a", encoding="utf-8") as arquivo:
         arquivo.write(f"{nome_tratado},{tempo_segundos}\n")
