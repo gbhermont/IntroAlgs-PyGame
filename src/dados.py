@@ -88,10 +88,10 @@ def imagem_com_bordas_arredondadas(imagem, raio):
     rect = imagem.get_rect()
     superficie_alvo = pygame.Surface(rect.size, pygame.SRCALPHA)
     
-    # Desenha um retângulo com cantos arredondados na nova superfície
+    """Desenha um retângulo com cantos arredondados na nova superfície"""
     pygame.draw.rect(superficie_alvo, (255, 255, 255, 255), rect, border_radius=raio)
     
-    # Aplica a imagem original por cima, cortando apenas onde o retângulo foi desenhado
+    """Aplica a imagem original por cima, cortando apenas onde o retângulo foi desenhado"""
     superficie_alvo.blit(imagem, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
     
     return superficie_alvo
@@ -115,7 +115,7 @@ def carregar_recursos_imagens(nivel):
         
     raio_borda = 10
 
-    # Limpa as frentes do nível anterior para não misturar dados
+    """Limpa as frentes do nível anterior para não misturar dados"""
     imagens_frente = {}
     
     try:
