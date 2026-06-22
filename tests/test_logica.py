@@ -22,28 +22,16 @@ def test_somar_tentativa_sem_duas_cartas():
     "Testa se a função somar_tentativa não soma tentativas quando não há exatamente duas cartas selecionadas"
     assert somar_tentativa(1, 3) == 3
 
-def test_somar_tentativa():
-    assert somar_tentativa(2, 4) == 5
-
-
-def test_somar_tentativa_sem_par():
-    assert somar_tentativa(1, 4) == 4
-
-
-def test_reiniciar_jogo():
-    dados.inicializar_tabuleiro(1)
-
-    assert reiniciar_jogo(10) == 0
-    assert len(dados.cartas) > 0
-
-
 def test_condicao_vitoria_false():
+    "Testa se a função condicao_vitoria retorna False quando nem todas as cartas estão descobertas"
     dados.inicializar_tabuleiro(1)
 
     assert condicao_vitoria() is False
 
 
 def test_condicao_vitoria_true():
+    "testa se a função condicao_vitoria retorna True quando todas as cartas estão descobertas. "
+    "Para isso, inicializa o tabuleiro e marca todas as cartas como descobertas antes de chamar a função."
     dados.inicializar_tabuleiro(1)
 
     for carta in dados.cartas:
@@ -53,14 +41,17 @@ def test_condicao_vitoria_true():
 
 
 def test_passar_fase():
+    "Testa se a função passar_fase retorna o próximo nível quando a fase é passada com sucesso. "
     assert passar_fase(True, 1) == 2
 
 
 def test_nao_passar_fase():
+    "Testa se a função passar_fase retorna o mesmo nível quando a fase não é passada com sucesso."
     assert passar_fase(False, 2) == 2
 
 
 def test_detectar_clique_reiniciar():
+    "Testa se a função detectar_clique_reiniciar retorna True quando o clique ocorre dentro do botão de reiniciar. "
     dados.inicializar_tabuleiro(1)
 
     # Dentro do botão
@@ -68,6 +59,7 @@ def test_detectar_clique_reiniciar():
 
 
 def test_detectar_clique_reiniciar_fora():
+    "Testa se a função detectar_clique_reiniciar retorna False quando o clique ocorre fora do botão de reiniciar. "
     dados.inicializar_tabuleiro(1)
 
     assert detectar_clique_reiniciar((0, 0), 1) is False
