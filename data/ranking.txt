@@ -33,6 +33,7 @@
 24
 23
 44
+<<<<<<< HEAD
 61
 24
 19
@@ -75,3 +76,15 @@
 36
 173
 22
+=======
+teste,14
+maria,42
+maria,41
+Macla,21
+Macla,46
+maria,28
+maria,49
+maria,54
+maria,49
+Macla,51
+>>>>>>> f5e77c6a14f324748de0d1d04b54fe48b662e759

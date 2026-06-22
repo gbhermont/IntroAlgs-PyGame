@@ -39,11 +39,45 @@ def verificar_e_salvar_recorde(tempo_segundos):
     return novo_recorde
 
 
-# Adiciona o tempo da partida no ranking
-def salvar_no_ranking(tempo_segundos):
+# Adiciona o nome do jogador e o tempo da partida no ranking
+def salvar_no_ranking(nome_jogador, tempo_segundos):
+    """Salva uma linha 'nome,tempo' no arquivo de ranking."""
+    nome_tratado = nome_jogador.strip().replace(",", "") or "Jogador"
     with open(Caminho_Ranking, "a", encoding="utf-8") as arquivo:
-        arquivo.write(str(tempo_segundos) + "\n")
+        arquivo.write(f"{nome_tratado},{tempo_segundos}\n")
 
+
+def carregar_ranking(caminho_arquivo=Caminho_Ranking):
+    """
+    Lê o arquivo de ranking e devolve uma lista de tuplas (nome, tempo)
+    ordenada do menor para o maior tempo (melhor tempo primeiro).
+    Linhas antigas que só tem o tempo (sem nome) aparecem como 'Anônimo'.
+    """
+    ranking = []
+
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+        for linha in arquivo:
+            linha = linha.strip()
+            if linha == "":
+                continue
+
+            if "," in linha:
+                nome, tempo_texto = linha.split(",", 1)
+                nome = nome.strip() or "Anônimo"
+            else:
+                nome = "Anônimo"
+                tempo_texto = linha
+
+            try:
+                tempo = int(tempo_texto.strip())
+            except ValueError:
+                continue  # ignora linha corrompida
+
+            ranking.append((nome, tempo))
+
+
+    ranking.sort(key=lambda registro: registro[1])
+    return ranking
 
 def imagem_com_bordas_arredondadas(imagem, raio):
     """Cria uma cópia da imagem com as bordas arredondadas usando o raio definido."""
@@ -71,6 +105,9 @@ def carregar_recursos_imagens(nivel):
         tamanho_carta = (150, 150)
         
     raio_borda = 10
+
+    # Limpa as frentes do nível anterior para não misturar dados
+    imagens_frente = {}
     
     try:
         # 1. Carrega, redimensiona e arredonda o VERSO

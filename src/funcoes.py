@@ -136,6 +136,12 @@ def menu_inicio(tela):
     y_input = rect_card.top + 190
     rect_input = pygame.Rect(x_input, y_input, largura_input, altura_input)
 
+    # Define o retângulo do botão "Ver Ranking", entre o campo de texto e o rodapé
+    largura_btn_ranking, altura_btn_ranking = 220, 36
+    x_btn_ranking = rect_card.centerx - (largura_btn_ranking // 2)
+    y_btn_ranking = rect_card.top + 248
+    rect_btn_ranking = pygame.Rect(x_btn_ranking, y_btn_ranking, largura_btn_ranking, altura_btn_ranking)
+
     # --- Loop Principal do Menu ---
     while rodando_menu:
         # Garante que o menu rode travado a 60 quadros por segundo
@@ -164,6 +170,10 @@ def menu_inicio(tela):
                 else:
                     if len(nome) < 15 and evento.unicode.isprintable():
                         nome += evento.unicode
+                # Se clicar no botão "Ver Ranking", abre a tela de ranking
+            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                if rect_btn_ranking.collidepoint(evento.pos):
+                    tela_ranking(tela)
 
         # --- Desenho dos Elementos na Tela ---
         
@@ -197,9 +207,96 @@ def menu_inicio(tela):
         pos_y_texto = rect_input.y + (rect_input.height - texto_nome.get_height()) // 2
         tela.blit(texto_nome, (pos_x_texto, pos_y_texto))
 
+        # 9. Desenha o botão "Ver Ranking"
+        pygame.draw.rect(tela, config.BOTAO, rect_btn_ranking, border_radius=8)
+        texto_btn_ranking = fonte_subtitulo.render("Ver Ranking", True, (255, 255, 255))
+        tela.blit(texto_btn_ranking, texto_btn_ranking.get_rect(center=rect_btn_ranking.center))
+
         # --- Atualização da Janela ---
         # Atualiza a tela a cada frame para renderizar as modificações
         pygame.display.update()
 
+        
     # Retorna o nome final obtido para o script principal
     return nome
+
+def tela_ranking(tela):
+    """
+    Exibe a tela de ranking em formato de card, listando nome e tempo
+    dos jogadores, ordenados do menor para o maior tempo.
+    """
+    fonte_titulo = pygame.font.SysFont("Arial", 36, bold=True)
+    fonte_linha = pygame.font.SysFont("Arial", 24)
+    fonte_vazio = pygame.font.SysFont("Arial", 22)
+
+    COR_CARD = (240, 244, 248)
+    COR_TEXTO_CARD = (40, 50, 60)
+    COR_DESTAQUE = (70, 130, 180)
+    COR_LINHA_PAR = (225, 232, 240)
+
+    largura_card, altura_card = 600, 600
+    x_card = (tela.get_width() - largura_card) // 2
+    y_card = (tela.get_height() - altura_card) // 2
+    rect_card = pygame.Rect(x_card, y_card, largura_card, altura_card)
+
+    largura_btn, altura_btn = 160, 40
+    rect_btn_voltar = pygame.Rect(
+        rect_card.centerx - largura_btn // 2,
+        rect_card.bottom - 60,
+        largura_btn,
+        altura_btn,
+    )
+
+    ranking = dados.carregar_ranking()
+    MAX_LINHAS_VISIVEIS = 12
+    ranking_exibido = ranking[:MAX_LINHAS_VISIVEIS]
+
+    rodando_ranking = True
+    relogio = pygame.time.Clock()
+
+    while rodando_ranking:
+        relogio.tick(60)
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+            if evento.type == pygame.KEYDOWN:
+                if evento.key in (pygame.K_ESCAPE, pygame.K_RETURN):
+                    rodando_ranking = False
+
+            if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                if rect_btn_voltar.collidepoint(evento.pos):
+                    rodando_ranking = False
+
+        tela.fill(FUNDO)
+
+        pygame.draw.rect(tela, COR_CARD, rect_card, border_radius=25)
+        pygame.draw.rect(tela, COR_DESTAQUE, rect_card, width=3, border_radius=25)
+
+        texto_titulo = fonte_titulo.render("Ranking - Melhores Tempos", True, COR_DESTAQUE)
+        tela.blit(texto_titulo, texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 45)))
+
+        x_posicao = rect_card.left + 40
+        x_nome    = rect_card.left + 110
+        x_tempo   = rect_card.right - 120
+        y_topo_lista = rect_card.top + 95
+
+        for indice, (nome, tempo) in enumerate(ranking_exibido):
+            y_linha = y_topo_lista + indice * 36
+            rect_linha = pygame.Rect(rect_card.left + 20, y_linha - 4, largura_card - 40, 32)
+            if indice % 2 == 0:
+                pygame.draw.rect(tela, COR_LINHA_PAR, rect_linha, border_radius=6)
+            texto_posicao = fonte_linha.render(f"{indice + 1}.", True, COR_TEXTO_CARD)
+            texto_nome    = fonte_linha.render(nome, True, COR_TEXTO_CARD)
+            texto_tempo   = fonte_linha.render(f"{tempo}s", True, COR_TEXTO_CARD)
+            tela.blit(texto_posicao, (x_posicao, y_linha))
+            tela.blit(texto_nome, (x_nome, y_linha))
+            tela.blit(texto_tempo, (x_tempo, y_linha))
+
+        pygame.draw.rect(tela, config.BOTAO, rect_btn_voltar, border_radius=8)
+        texto_voltar = fonte_linha.render("Voltar", True, (255, 255, 255))
+        tela.blit(texto_voltar, texto_voltar.get_rect(center=rect_btn_voltar.center))
+
+        pygame.display.update()
