@@ -1,6 +1,6 @@
 import pygame
 import src.dados as dados
-from src.funcoes import menu_inicio
+import src.config as config 
 
 from src.config import (
     LARGURA_TELA,
@@ -8,22 +8,18 @@ from src.config import (
     FPS,
     TITULO_JOGO,
     FUNDO,
-    CARTA,
     TEXTO,
-    BOTAO,
     TEMPO_TELA_VITORIA,
     NIVEL_MAXIMO,
 )
-
 from src.funcoes import (
     desenhar_botao,
     desenhar_tentativas,
     somar_tentativa,
-    reiniciar_jogo,
     condicao_vitoria,
-    passar_fase,
     detectar_clique_reiniciar,
-    menu_inicio
+    menu_inicio,
+    tela_ranking
 )
 
 
@@ -40,6 +36,7 @@ def executar_jogo():
 
     relogio = pygame.time.Clock()
 
+    # Chama o menu em formato de card e captura o nome inserido
     nome_jogador = menu_inicio(tela)
     
     if nome_jogador == "":
@@ -90,8 +87,10 @@ def executar_jogo():
                 venceu               = True
                 jogo_concluido       = (nivel == NIVEL_MAXIMO)
                 tempo_inicio_vitoria = pygame.time.get_ticks()
-                dados.salvar_no_ranking(nome_jogador, tempo_atual)
-                dados.verificar_e_salvar_recorde(tempo_atual)
+
+                if jogo_concluido:
+                    dados.salvar_no_ranking(nome_jogador, tempo_atual)
+                    dados.verificar_e_salvar_recorde(tempo_atual)
 
         """
         Transição automática de nivel.
@@ -108,7 +107,13 @@ def executar_jogo():
             tempo_atual  = 0
             tempo_inicio = pygame.time.get_ticks()
 
+        # Se o jogo foi concluído (venceu o nível 3) e o tempo do card de vitória acabou
         if jogo_concluido and tempo_na_tela_vitoria >= TEMPO_TELA_VITORIA:
+            # Abre a tela de ranking automaticamente!
+            # O jogo vai ficar preso na tela de ranking até o jogador clicar em "Voltar" ou apertar ESC/ENTER
+            tela_ranking(tela)
+            
+            # Assim que o jogador sair da tela de ranking, o loop principal é encerrado e o jogo fecha
             rodando = False
 
         if rodando:

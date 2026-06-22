@@ -173,13 +173,9 @@ Descreva qual será a versão mínima aceitável do jogo.
 
 Esta seção é importante para evitar que o grupo escolha uma ideia grande demais.
 
-Exemplo:
-
-> A versão mínima do jogo terá um personagem controlado pelo teclado, obstáculos aparecendo na tela, sistema de vidas, sistema de pontuação e tela de fim de jogo.
-
 Escopo mínimo:
 
-> A versão mínima do jogo terá cartas embaralhadas em tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, sistema de ranking por tempo, temporizador e mensagem de vitória.
+> A versão mínima do jogo terá cartas embaralhadas em tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, temporizador e mensagem de vitória.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
