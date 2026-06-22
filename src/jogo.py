@@ -185,11 +185,11 @@ def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
     texto_tempo     = fonte_dados.render(f"Tempo: {tempo}s", True, TEXTO)
     texto_nome = fonte_dados.render(f"Jogador: {nome_jogador}", True, TEXTO)
 
-    tela.blit(texto_titulo,    texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50)))
-    tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 110)))
-    tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 160)))
-    tela.blit(texto_tempo,     texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 210)))
-    tela.blit(texto_nome, (rect_card.centerx - 100, rect_card.top + 80))
+    tela.blit(texto_titulo, texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50)))
+    tela.blit(texto_nome, (rect_card.centerx - 100, rect_card.top + 100))
+    tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 150)))
+    tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 190)))
+    tela.blit(texto_tempo, texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 230)))
 
 
 def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
@@ -209,25 +209,28 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     if venceu:
         desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo, nivel)
 
-    desenhar_tentativas(tela, tentativas, fonte)
+    desenhar_tentativas(tela, tentativas)
     desenhar_botao(tela)
 
     """exibe o nivel atual, o tempo e o recorde no canto superior esquerdo"""
-    fonte_hud = pygame.font.SysFont("Arial", 28)
+    fonte_hud = pygame.font.SysFont("Arial", 28, bold=True)
+    Y_LINHA = 34
 
-    tela.blit(fonte_hud.render(f"Nivel: {nivel}", True, TEXTO),  (20, 30))
-    tela.blit(fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO), (160, 30))
+    texto_jogador = fonte_hud.render(f"Jogador: {nome_jogador}", True, TEXTO)
+    tela.blit(texto_jogador, (20, Y_LINHA))
+
+    texto_nivel = fonte_hud.render(f"Nível: {nivel}", True, TEXTO)
+    tela.blit(texto_nivel, (280, Y_LINHA))
+
+    texto_tempo = fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO)
+    tela.blit(texto_tempo, (420, Y_LINHA))
 
     recorde = dados.carregar_recorde("data/recorde.txt")
     if recorde > 0:
-        tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (20, 100))
-    
-    texto_nome = fonte_hud.render(
-    f"Jogador: {nome_jogador}",
-    True,
-    TEXTO
-)
-    tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (320, 30))
+        texto_recorde = fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO)
+        tela.blit(texto_recorde, (600, Y_LINHA))
 
-    tela.blit(texto_nome, (20, 140))
+    desenhar_botao(tela)
+    desenhar_tentativas(tela, tentativas)
+
     pygame.display.update()

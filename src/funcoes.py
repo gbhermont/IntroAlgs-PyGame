@@ -32,10 +32,9 @@ def verificar_colisao(retangulo_1, retangulo_2):
     return retangulo_1.colliderect(retangulo_2)
 
 def desenhar_botao(tela):
-    fonte = pygame.font.SysFont("Arial", 32, True, False)
+    fonte = pygame.font.SysFont("Arial", 25, True, False)
     
-    # Centralizado de forma perfeita em relação ao novo grid de cartas (X=350, Y=645)
-    retangulo_botao = pygame.Rect(600, 30, 200, 38) 
+    retangulo_botao = pygame.Rect(820, 30, 150, 38) 
     pygame.draw.rect(tela, (config.BOTAO), retangulo_botao, border_radius=8)
     
     texto_botao = fonte.render("Reiniciar", True, (255, 255, 255))
@@ -43,9 +42,10 @@ def desenhar_botao(tela):
     tela.blit(texto_botao, texto_posicao)
     return retangulo_botao
 
-def desenhar_tentativas(tela,tentativas,fonte):
-    texto = fonte.render(f"Tentativas: {tentativas}", True, (0,0,0)) #faz o texto na cor preta(0,0,0) usando a fonte que passei como parametro
-    posicao_texto = texto.get_rect(topright=(1350, 30)) #pega o retângulo do texto e posiciona ele no canto superior direito da tela
+def desenhar_tentativas(tela,tentativas):
+    fonte_hud = pygame.font.SysFont("Arial", 28, True, False)
+    texto = fonte_hud.render(f"Tentativas: {tentativas}", True, config.TEXTO) 
+    posicao_texto = texto.get_rect(topright=(1340, 34)) #pega o retângulo do texto e posiciona ele no canto superior direito da tela
     tela.blit(texto, posicao_texto) #desenha o texto na tela usando a posição definida
 
 def desenhar_texto(tela,texto,x,y,cor,fonte): 
@@ -90,14 +90,14 @@ def passar_fase(venceu, fase_atual):
 
 def detectar_clique_reiniciar(pos_mouse, nivel):
     """Detecta se o clique foi no botão reiniciar. Se sim, reinicia o nivel atual e retorna True."""
-    retangulo_botao = pygame.Rect(600, 30, 200, 38)
+    retangulo_botao = pygame.Rect(820, 30, 160, 38)
     if retangulo_botao.collidepoint(pos_mouse):
         dados.cartas.clear()
         dados.cartas_selecionadas.clear()
         dados.inicializar_tabuleiro(nivel)
         return True
     return False
- 
+
 def menu_inicio(tela):
     """
     Exibe a tela de menu inicial em formato de card.
