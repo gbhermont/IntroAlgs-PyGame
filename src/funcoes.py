@@ -40,10 +40,10 @@ def somar_tentativa(cartas_selecionadas, tentativas):
 def reiniciar_jogo(tentativas):
     "zera as tentativas e redefine o tabuleiro"
     "a funcao usa tentativas como parametro para resetar o contador de tentativas e retorna ele zerado"
-    dados.cartas.clear() #limpa a lista de cartas para reiniciar o jogo
-    dados.cartas_selecionadas.clear() #limpa a lista de cartas selecionadas
-    dados.inicializar_tabuleiro() #inicia o tabuleiro dnv
-    return 0 #retorna 0 para resetar as tentativas
+    dados.cartas.clear() 
+    dados.cartas_selecionadas.clear() 
+    dados.inicializar_tabuleiro() 
+    return 0 
 
 def condicao_vitoria(): #macla
     """Verifica se todas as cartas estão com os pares encontrados"""
@@ -59,7 +59,6 @@ def passar_fase(venceu, fase_atual):
     if venceu:
         fase_atual +=1
     return fase_atual
-    #fase = passar_fase(venceu) -> implementar isso no fluxo do jogo dps
 
 def detectar_clique_reiniciar(pos_mouse, nivel):
     """Detecta se o clique foi no botão reiniciar. Se sim, reinicia o nivel atual e retorna True."""

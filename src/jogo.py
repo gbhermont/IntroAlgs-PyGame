@@ -40,20 +40,19 @@ def executar_jogo():
     nome_jogador = menu_inicio(tela)
     
     if nome_jogador == "":
-        nome_jogador = "Jogador"  #macla
+        nome_jogador = "Jogador" 
 
-    """começa sempre no nivel 1 (facil)"""
     nivel = 1
     dados.inicializar_tabuleiro(nivel)
 
-    tentativas        = 0
-    venceu            = False
-    jogo_concluido    = False  # True quando o nivel 3 foi vencido
+    tentativas = 0
+    venceu = False
+    jogo_concluido = False 
     tempo_inicio_vitoria = 0
 
     tempo_inicio = pygame.time.get_ticks()
-    tempo_atual  = 0
-    rodando      = True
+    tempo_atual = 0
+    rodando = True
 
     while rodando:
         relogio.tick(FPS)
@@ -84,8 +83,8 @@ def executar_jogo():
             tentativas = atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
 
             if condicao_vitoria():
-                venceu               = True
-                jogo_concluido       = (nivel == NIVEL_MAXIMO)
+                venceu = True
+                jogo_concluido = (nivel == NIVEL_MAXIMO)
                 tempo_inicio_vitoria = pygame.time.get_ticks()
 
                 if jogo_concluido:
@@ -139,7 +138,9 @@ def detectar_clique(pos_mouse):
 
 
 def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador):
-    """Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas"""
+    """
+    Verifica se o par de cartas escolhido é igual ou diferente e retorna o número atual de tentativas
+    """
     if len(dados.cartas_selecionadas) == 2:
 
         desenhar_elementos(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador)
@@ -152,7 +153,6 @@ def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador):
         carta1 = dados.cartas[pos1]
         carta2 = dados.cartas[pos2]
 
-        """Se forem iguais, o jogador acertou o par"""
         if carta1["id"] == carta2["id"]:
             carta1["descoberta"] = True
             carta2["descoberta"] = True
@@ -167,7 +167,13 @@ def atualizar_jogo(tela, tentativas, venceu, tempo_atual, nivel, nome_jogador):
 
 
 def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
-    """Desenha um pop-up gráfico (card) centralizado com os resultados do nivel."""
+    """
+    Desenha um card centralizado com os resultados do nivel (nome do jogador, nível, tempo e número de tentativas).
+    x_card e y_card definem a largura e a altura do card.
+    A mensagem é diferente dependendo do nível:
+    Nível máximo: "Você zerou o jogo!"
+    Outros níveis: "Nivel concluído!"
+    """
     largura_card, altura_card = 500, 280
     x_card = (LARGURA_TELA - largura_card) // 2
     y_card = (ALTURA_TELA  - altura_card)  // 2
@@ -177,8 +183,7 @@ def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
 
     fonte_titulo = pygame.font.SysFont("Arial", 36, bold=True)
     fonte_dados  = pygame.font.SysFont("Arial", 26)
-
-    """mensagem diferente dependendo se é o ultimo nivel ou não"""
+    
     if nivel == NIVEL_MAXIMO:
         msg_titulo = "Você zerou o jogo!"
     else:
@@ -191,23 +196,20 @@ def desenhar_card_vitoria(tela, nome_jogador, tentativas, tempo=0, nivel=1):
     texto_nome = fonte_dados.render(f"Jogador: {nome_jogador}", True, TEXTO)
     
     # --- Posições ---
-    # Centraliza o Título bem no topo do card
     tela.blit(texto_titulo, texto_titulo.get_rect(center=(rect_card.centerx, rect_card.top + 50)))
-    
-    # Coloca o Nome do Jogador logo abaixo do título (Y = top + 100)
     tela.blit(texto_nome, (rect_card.centerx - 100, rect_card.top + 100))
-    
-    # Desce o Subtítulo um pouco mais para baixo (Y = top + 150)
     tela.blit(texto_subtitulo, texto_subtitulo.get_rect(center=(rect_card.centerx, rect_card.top + 150)))
-    
-    # Mostra as Tentativas (Y = top + 190)
     tela.blit(texto_resultado, texto_resultado.get_rect(center=(rect_card.centerx, rect_card.top + 190)))
-    
-    # Mostra o Tempo no final do card (Y = top + 230)
     tela.blit(texto_tempo, texto_tempo.get_rect(center=(rect_card.centerx, rect_card.top + 230)))
 
 def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
-    """Desenha o fundo, as cartas, o HUD e o card de vitória se necessário."""
+    """
+    Atualiza a interface gráfica do jogo e renderiza todos os componentes visuais na tela.
+    Desenha o estado atualizado das cartas (frente ou verso).
+    Exibe as informações síncronas do HUD (nome do jogador, nível, tempo e recorde) alinhadas
+    horizontalmente no topo, além de acionar o botão e o contador de tentativas.
+    Caso a condição de vitória seja atingida, Chama a função que desenha o card de vitória.
+    """
     tela.fill(FUNDO)
     fonte = pygame.font.SysFont("Arial", 40)
 
@@ -226,7 +228,6 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     desenhar_tentativas(tela, tentativas)
     desenhar_botao(tela)
 
-    """exibe o nivel atual, o tempo e o recorde no canto superior esquerdo"""
     fonte_hud = pygame.font.SysFont("Arial", 28, bold=True)
     Y_LINHA = 34
 

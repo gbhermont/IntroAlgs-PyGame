@@ -1,7 +1,6 @@
 import random
 import pygame
 
-# Caminhos dos arquivos de recorde e ranking
 Caminho_Recorde = "data/recorde.txt"
 Caminho_Ranking = "data/ranking.txt"
 
@@ -30,18 +29,20 @@ def carregar_recorde(caminho_arquivo):
     except FileNotFoundError:
         return 0
 
-# Verifica se o jogador bateu o recorde e salva se sim
 def verificar_e_salvar_recorde(tempo_segundos):
+    """Verifica se o jogador bateu o recorde e retorna o valor dele se sim"""
+    
     recorde_atual = carregar_recorde(Caminho_Recorde)
     novo_recorde = recorde_atual == 0 or tempo_segundos < recorde_atual
     if novo_recorde:
         salvar_recorde(Caminho_Recorde, tempo_segundos)
     return novo_recorde
 
-
-# Adiciona o nome do jogador e o tempo da partida no ranking
 def salvar_no_ranking(nome_jogador, tempo_segundos):
-    """Salva uma linha 'nome,tempo' no arquivo de ranking."""
+    """
+    Adiciona o nome do jogador e o tempo da partida no ranking
+    Salva uma linha 'nome,tempo' no arquivo de ranking.
+    """
     nome_tratado = nome_jogador.strip().replace(",", "") or "Jogador"
     with open(Caminho_Ranking, "a", encoding="utf-8") as arquivo:
         arquivo.write(f"{nome_tratado},{tempo_segundos}\n")
@@ -71,7 +72,7 @@ def carregar_ranking(caminho_arquivo=Caminho_Ranking):
             try:
                 tempo = int(tempo_texto.strip())
             except ValueError:
-                continue  # ignora linha corrompida
+                continue  
 
             ranking.append((nome, tempo))
 
@@ -80,12 +81,14 @@ def carregar_ranking(caminho_arquivo=Caminho_Ranking):
     return ranking
 
 def imagem_com_bordas_arredondadas(imagem, raio):
-    """Cria uma cópia da imagem com as bordas arredondadas usando o raio definido."""
-    # Cria uma superfície do mesmo tamanho com suporte a transparência
+    """
+    Cria uma cópia da imagem com as bordas arredondadas usando o raio definido.
+    Cria uma superfície do mesmo tamanho com suporte a transparência
+    """
     rect = imagem.get_rect()
     superficie_alvo = pygame.Surface(rect.size, pygame.SRCALPHA)
     
-    # Desenha um retângulo com cantos arredondados na nova superfície (cor branca total)
+    # Desenha um retângulo com cantos arredondados na nova superfície
     pygame.draw.rect(superficie_alvo, (255, 255, 255, 255), rect, border_radius=raio)
     
     # Aplica a imagem original por cima, cortando apenas onde o retângulo foi desenhado
@@ -94,7 +97,13 @@ def imagem_com_bordas_arredondadas(imagem, raio):
     return superficie_alvo
 
 def carregar_recursos_imagens(nivel):
-    """Carrega as imagens da pasta assets e arredonda suas bordas"""
+    """
+    Carrega as imagens da pasta assets e arredonda suas bordas
+    Como temos quantidades diferentes de cartas em cada um dos níveis, elas tiveram que ter tamnhos diferentes em cada um deles:
+    nivel 1: 180
+    nivel 2: 150
+    nivel 3: 150 (pois tem o mesmo número de linhas que o nível 2)
+    """
     global imagens_frente, imagens_verso
     
     if nivel == 1:
@@ -110,18 +119,17 @@ def carregar_recursos_imagens(nivel):
     imagens_frente = {}
     
     try:
-        # 1. Carrega, redimensiona e arredonda o VERSO
         img_verso_crua = pygame.image.load("assets/imagens/verso.jpg")
         img_verso_redimensionada = pygame.transform.scale(img_verso_crua, tamanho_carta)
         imagens_verso = imagem_com_bordas_arredondadas(img_verso_redimensionada, raio_borda)
         
-        # 2. Carrega, redimensiona e arredonda as FRENTES
+        """
+        Carrega imagens diferentes de acordo com o nível através dos ifs e do iterador do for
+        """
         if nivel == 1:
             for i in range(1, 7):
                 img_crua = pygame.image.load(f"assets/imagens/divas{i}.jpg")
                 img_redimensionada = pygame.transform.scale(img_crua, tamanho_carta)
-                
-                # Guarda no dicionário já com a borda cortada arredondada!
                 imagens_frente[i] = imagem_com_bordas_arredondadas(img_redimensionada, raio_borda)
         elif nivel == 2:
             for i in range(1, 9):
@@ -139,7 +147,7 @@ def carregar_recursos_imagens(nivel):
 
 def inicializar_tabuleiro(nivel=1):
     """
-    Gera as cartas do tabuleiro de acordo com o nivel escolhido.
+    Gera as cartas do tabuleiro e define suas posições e quantidade de linhas e colunas de acordo com o nivel escolhido.
     Nivel 1 (facil)  : 4 colunas x 3 linhas = 12 cartas, 
     Nivel 2 (medio)  : 4 colunas x 4 linhas = 16 cartas, 
     Nivel 3 (dificil): 5 colunas x 4 linhas = 20 cartas,
@@ -168,6 +176,13 @@ def inicializar_tabuleiro(nivel=1):
 
     total_cartas = colunas * linhas
     total_pares  = total_cartas // 2
+    
+    """
+    Gera a estrutura lógica do tabuleiro e calcula o posicionamento geográfico das cartas na tela.
+    Cria uma lista de identificadores únicos duplicados para formar os pares obrigatórios
+    e aplica um o random para garantir o embaralhamento do jogo.
+    Ao atingir o limite estipulado de colunas, colunas fica igual a 0 e avança para a próxima linha.
+    """
 
     ids = []
     for i in range(total_pares):
