@@ -1,4 +1,3 @@
-
 ## 1. Nome provisório do jogo
 
 Match Up
@@ -117,4 +116,4 @@ partida.
 cartas no tabuleiro.
 - Melhoria 3: implementar uma tela inicial e um ranking com os melhores resultados,
 baseado no menor número de tentativas ou no menor tempo.
-- Melhoria 4: Permitir que tenha 2 jogadores
+- Melhoria 4: Permitir que tenha 2 jogadores.
