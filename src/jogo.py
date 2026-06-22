@@ -86,10 +86,8 @@ def executar_jogo():
                 venceu = True
                 jogo_concluido = (nivel == NIVEL_MAXIMO)
                 tempo_inicio_vitoria = pygame.time.get_ticks()
-
-                if jogo_concluido:
-                    dados.salvar_no_ranking(nome_jogador, tempo_atual)
-                    dados.verificar_e_salvar_recorde(tempo_atual)
+                dados.salvar_no_ranking(nome_jogador, tempo_atual)
+                dados.verificar_e_salvar_recorde(tempo_atual)
 
         """
         Transição automática de nivel.
@@ -211,7 +209,6 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     Caso a condição de vitória seja atingida, Chama a função que desenha o card de vitória.
     """
     tela.fill(FUNDO)
-    fonte = pygame.font.SysFont("Arial", 40)
 
     for carta in dados.cartas:
         posicao_carta = (carta["x"], carta["y"])
@@ -231,29 +228,12 @@ def desenhar_elementos(tela, tentativas, venceu, tempo, nivel, nome_jogador):
     fonte_hud = pygame.font.SysFont("Arial", 28, bold=True)
     Y_LINHA = 34
 
-    texto_jogador = fonte_hud.render(f"Jogador: {nome_jogador}", True, TEXTO)
-    tela.blit(texto_jogador, (20, Y_LINHA))
-
-    texto_nivel = fonte_hud.render(f"Nível: {nivel}", True, TEXTO)
-    tela.blit(texto_nivel, (280, Y_LINHA))
-
-    texto_tempo = fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO)
-    tela.blit(texto_tempo, (420, Y_LINHA))
+    tela.blit(fonte_hud.render(f"Jogador: {nome_jogador}", True, TEXTO), (20, Y_LINHA))
+    tela.blit(fonte_hud.render(f"Nível: {nivel}", True, TEXTO), (280, Y_LINHA))
+    tela.blit(fonte_hud.render(f"Tempo: {tempo}s", True, TEXTO), (420, Y_LINHA))
 
     recorde = dados.carregar_recorde("data/recorde.txt")
-
     if recorde > 0:
-        texto_recorde = fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO)
-        tela.blit(texto_recorde, (600, Y_LINHA))
-
-    desenhar_botao(tela)
-    desenhar_tentativas(tela, tentativas)
-    
-    texto_nome = fonte_hud.render(
-    f"Jogador: {nome_jogador}",
-    True,
-    TEXTO
-)
-    tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (320, 30))
+        tela.blit(fonte_hud.render(f"Recorde: {recorde}s", True, TEXTO), (600, Y_LINHA))
 
     pygame.display.update()
