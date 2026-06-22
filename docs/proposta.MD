@@ -1,8 +1,3 @@
-# Proposta Inicial do Jogo
-
-Este documento deve ser preenchido pelo grupo na Semana 1 do projeto.
-
-A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolvida com Python e Pygame dentro do prazo disponível.
 
 ## 1. Nome provisório do jogo
 
@@ -17,13 +12,11 @@ Match Up
 
 ## 3. Tipo de jogo
 
-Tipo escolhido pelo grupo:
-
-> Jogo de Memória
+Jogo de Memória
 
 ## 4. Descrição geral do jogo
 
-> No jogo Match Up, os jogadores enfrentam um tabuleiro com diversas cartas viradas para baixo, a temática do jogo é a série Off-Campus. A interface exibe o nível atual, o tempo decorrido, o recorde local e o nome do jogador, além de um contador de tentativas e um botão gráfico para reiniciar a partida. O jogador interage exclusivamente por meio do mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares correspondentes, exigindo memorização rápida das imagens. O desafio aumenta progressivamente a cada nível, alterando o tamanho do tabuleiro e a quantidade de cartas.
+No jogo Match Up, os jogadores enfrentam um tabuleiro com diversas cartas viradas para baixo, a temática do jogo é a série Off-Campus. A interface exibe o nível atual, o tempo decorrido, o recorde local e o nome do jogador, além de um contador de tentativas e um botão gráfico para reiniciar a partida. O jogador interage exclusivamente por meio do mouse, clicando nas cartas para revelá-las. O principal objetivo é encontrar todos os pares correspondentes, exigindo memorização rápida das imagens. O desafio aumenta progressivamente a cada nível, alterando o tamanho do tabuleiro e a quantidade de cartas.
 
 ## 5. Objetivo do jogador
 
@@ -39,7 +32,7 @@ Regra 5: O número total de tentativas e o tempo são registrados e exibidos ao 
 
 ## 7. Condição de vitória
 
-> O jogador vence o jogo ao concluir com sucesso o terceiro e último nível do tabuleiro, encontrando todos os pares de cartas e registrando seu tempo final.
+O jogador vence o jogo ao concluir com sucesso o terceiro e último nível do tabuleiro, encontrando todos os pares de cartas e registrando seu tempo final.
 
 ## 8. Condição de derrota ou encerramento
 
@@ -57,19 +50,19 @@ O Ranking: A tabela final que lê o arquivo de texto e lista de forma ordenada o
 
 ## Jogador ou elemento principal
 
-> O jogador irá interagir com o jogo por meio do mouse, clicando nas cartas do tabuleiro para revelá-las e tentar encontrar os pares corretos. Sua principal função será memorizar as posições das cartas e realizar as combinações certas até completar o jogo.
+O jogador irá interagir com o jogo por meio do mouse, clicando nas cartas do tabuleiro para revelá-las e tentar encontrar os pares corretos. Sua principal função será memorizar as posições das cartas e realizar as combinações certas até completar o jogo.
 
 ## Obstáculos, inimigos ou desafios
 
-> Os principais desafios serão lembrar a posição das cartas já reveladas e evitar erros nas combinações, conseguir achar todos os pares dentro do limite de tempo e passar de nível onde a dificuldade aumenta a cada fase.
+Os principais desafios serão lembrar a posição das cartas já reveladas e evitar erros nas combinações, conseguir achar todos os pares dentro do limite de tempo e passar de nível onde a dificuldade aumenta a cada fase.
 
 ## Itens, alvos ou objetos de interação
 
-> Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória, níveis de dificuldade, tentativas, temporizador e ranking por tempo.
+Os principais elementos de interação serão as cartas do tabuleiro, que ficarão viradas para baixo até serem clicadas. Cada carta terá uma imagem ou símbolo, e o objetivo será encontrar seus pares. O jogo também contará com tela inicial, botão de reiniciar, mensagem de vitória, níveis de dificuldade, tentativas, temporizador e ranking por tempo.
 
 ## Pontuação, vidas, tempo ou progresso
 
-> O jogo acompanhará o progresso por meio do contador de tentativas, um temporazidor e se o jogador passou de nível. Além de um ranking para definir quem fez o melhor tempo.
+O jogo acompanhará o progresso por meio do contador de tentativas, um temporazidor e se o jogador passou de nível. Além de um ranking para definir quem fez o melhor tempo.
 
 ## 10. Controles previstos
 
@@ -112,7 +105,7 @@ Dificuldades previstas:
 
 ## 14. Escopo mínimo para a entrega final
 
-> A versão mínima do jogo terá cartas embaralhadas em um tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, temporizador e mensagem de vitória.
+A versão mínima do jogo terá cartas embaralhadas em um tabuleiro, um controle por clique de mouse para virar as cartas, dificuldade por níveis, tentativas, temporizador e mensagem de vitória.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
